@@ -1,7 +1,5 @@
-eirinifs/eirinifs.tar:
-  size: 923359232
-  sha: 91c5d06be01ab62d5dae0ba91011e3af40cd5881
-golang/go1.9.2.linux-amd64.tar.gz:
-  size: 104247844
-  object_id: 2f9de529-3ef3-49d2-4089-088c567b46c9
-  sha: 94c889e039e3d2e94ed95e8f8cb747c5bc1c2b58
+---
+golang/go1.11.5.linux-amd64.tar.gz:
+  size: 140132627
+  object_id: bb27b548-3ee3-45f2-5b9a-9eb5145d5381
+  sha: sha256:ff54aafedff961eb94792487e827515da683d61a5f9482f668008832631e5d25

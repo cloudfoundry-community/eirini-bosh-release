@@ -7,6 +7,9 @@ pidfile=$run_dir/opi.pid
 
 echo $$ > $pidfile
 
+export KUBERNETES_SERVICE_HOST="<%= p("opi.kube_service_host") %>"
+export KUBERNETES_SERVICE_PORT="<%= p("opi.kube_service_port") %>"
+
 exec /var/vcap/packages/eirini/bin/opi connect \
   --config="$conf_dir/opi.yml" \
   2> >(tee -a $log_dir/opi.stderr.log | logger -p user.error -t vcap.opi) \

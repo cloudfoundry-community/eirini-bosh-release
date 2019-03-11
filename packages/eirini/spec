@@ -5,4 +5,7 @@ dependencies:
   - golang
 
 files:
-  - code.cloudfoundry.org/eirini/**/*
+  - code.cloudfoundry.org/eirini/**/*.go
+  - code.cloudfoundry.org/eirini/**/*.lock
+  - code.cloudfoundry.org/eirini/**/*.toml
+  - code.cloudfoundry.org/eirini/**/*.s

@@ -4,58 +4,53 @@ name: opi
 templates:
   opi_ctl.erb: bin/opi_ctl
   opi_as_vcap.erb: bin/opi_as_vcap
-  bmp.yml.erb: config/bpm.yml
-  kube_config.erb: config/kube.yml
   opi.yml.erb: config/opi.yml
+  certs/cc-ca.crt.erb: certs/cc-ca.crt
+  certs/cc.crt.erb: certs/cc.crt
+  certs/cc.key.erb: certs/cc.key
+  certs/doppler-ca-crt.erb: certs/doppler-ca.crt
+  certs/doppler.crt.erb: certs/doppler.crt
+  certs/doppler.key.erb: certs/doppler.key
 
 packages:
   - pid_utils
   - eirini
 
 properties:
-  bpm.enabled:
-    description: "Enable Bosh Process Manager"
-    default: false
-  opi.cc_uploader_ip:
-    description: "The cc-uploader ip used when uploading a staged droplet"
-  opi.ccAPI:
-    description: "The API endpoint of the Cloud Controller"
-  opi.ccUser:
-    default: internal_user
-    description: "The internal username for the Cloud Controller"
-  opi.ccPassword:
-    description: "The internal password for the Cloud Controller"
-  opi.kube_config:
-    description: "The full Kubernetes configuration file content. Note: Avoid using certificates file references, instead you should use the file content by using the `flatten` option to retrieve your configuration YAML."
-  opi.adminUser:
-    default: admin
-    description: "The CF admin user"
-  opi.adminPassword:
-    description: "The CF admin password"
-  opi.externalEiriniAddress:
-    description: "external address for opi registry"
   opi.kube_namespace:
     default: "default"
     description: "Kubernetes namespace where to run deployments and tasks"
-  opi.kube_endpoint:
-    description: "Kubernetes endpoint used when creating an Ingress"
-  opi.skipSslValidation:
-    default: false
-    description: "True to continue with an insecure target"
+  opi.kube_service_host:
+    description: "Kubernetes service host. Should be set to the value of KUBERNETES_SERVICE_HOST."
+  opi.kube_service_port:
+    description: "Kubernetes service port. Should be set to the value of KUBERNETES_SERVICE_PORT."
   opi.registry_address:
     description: "Address of registry"
   opi.eirini_address:
-    description: "Address of eirini"
-  opi.internal_registry_address:
-    default: http://127.0.0.1:8080
-    description: "Internal address of the registry"
-  opi.insecure_skip_verify:
-    default: true
-    description: "http client tls config"
+    description: "Address of Eirini"
   opi.nats_password:
     description: "password for nats"
   opi.nats_ip:
     description: "nats_ip"
-  opi.use_ingress:
-    default: true
-    description: "If this is true, Eirini creates an ingress and the Cloud Foundry Router forwards app requests to it. Otherwise, an ingress is not created and the Cloud Foundry Router forwards requests directly to the app service."
+  opi.certs_secret_name:
+    description: "Name of the kube secret containing SCF certs"
+  opi.cc_internal_api:
+    description: "Internal URL for the Cloud Controller"
+  opi.stager_image_tag:
+    description: "Image tag for the stager"
+  opi.metrics_source_address:
+    description: "Source URL for metrics"
+  opi.loggregator_address:
+    description: "Doppler address"
+  opi.loggregator_cert:
+    description: "Doppler cert"
+  opi.loggregator_key:
+    description: "Doppler key"
+  opi.loggregator_ca:
+    description: "Doppler CA cert"
+  opi.cc_cert:
+    description: "Cloud Controller cert"
+  opi.cc_key:
+    description: "Cloud Controller key"
+  opi.cc_ca:
+    description: "Cloud Controller CA cert"

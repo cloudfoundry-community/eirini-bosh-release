@@ -1,0 +1,16 @@
+---
+name: eirinifs
+
+description: This job copies the eirinifs to a desired location
+
+packages:
+  - eirinifs
+
+templates:
+  pre-start.erb: bin/pre-start
+
+properties:
+  eirinifs.path:
+    description: Where to copy the eirinifs tarball
+    default: /var/vcap/store/bits-service/assets
+

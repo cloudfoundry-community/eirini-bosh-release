@@ -4,9 +4,10 @@ opi:
   nats_password: <%= p("opi.nats_password") %>
   cc_certs_secret_name: <%= p("opi.certs_secret_name") %>
   cc_internal_api: <%= p("opi.cc_internal_api") %>
+  cc_uploader_ip: <%= p("opi.cc_uploader_ip") %>
   registry_address: <%= p("opi.registry_address") %>
   eirini_address: <%= p("opi.eirini_address") %>
-  stager_image_tag: <%= p("opi.stager_image_tag") %>
+  stager_image: <%= p("opi.stager_image") %>
   metrics_source_address: <%= p("opi.metrics_source_address") %>
   loggregator_address: <%= p("opi.loggregator_address") %>
   loggergator_cert_path: /var/vcap/jobs/opi/certs/doppler.crt

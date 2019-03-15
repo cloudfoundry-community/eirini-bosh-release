@@ -34,10 +34,13 @@ properties:
     description: "nats_ip"
   opi.certs_secret_name:
     description: "Name of the kube secret containing SCF certs"
+    default: "scf-credentials"
   opi.cc_internal_api:
     description: "Internal URL for the Cloud Controller"
-  opi.stager_image_tag:
-    description: "Image tag for the stager"
+  opi.cc_uploader_ip:
+    description: "IP Address of the Cloud Controller uploader"
+  opi.stager_image:
+    description: "Base docker image for staging"
   opi.metrics_source_address:
     description: "Source URL for metrics"
   opi.loggregator_address:

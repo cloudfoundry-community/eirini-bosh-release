@@ -1,3 +1,6 @@
 [submodule "src/code.cloudfoundry.org/eirini"]
 	path = src/code.cloudfoundry.org/eirini
 	url = https://github.com/cloudfoundry-incubator/eirini
+[submodule "src/eirinifs"]
+	path = src/eirinifs
+	url = https://github.com/cloudfoundry-incubator/eirinifs.git

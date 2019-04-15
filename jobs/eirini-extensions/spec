@@ -1,0 +1,24 @@
+---
+name: eirini-extensions
+
+templates:
+  eirini-extensions_ctl.erb: bin/eirini-extensions-ctl
+  eirini-extensions_as_vcap.erb: bin/eirini-extensions_as_vcap
+
+packages:
+  - eirini-extensions
+
+properties:
+  eirini-extensions.namespace:
+    default: "eirini"
+    description: "Kubernetes namespace where to watch for Eirini applications."
+  eirini-extensions.operator_webhook_host:
+    description: "Hostname/IP under which the webhook server can be reached from the cluster."
+  eirini-extensions.operator_webhook_port:
+    description: "Port the webhook server listens on."
+  eirini-extensions.kubeconfig:
+    description: "Path to a kubeconfig, not required in-cluster."
+  eirini-extensions.kube_service_host:
+    description: "Kubernetes service host. Should be set to the value of KUBERNETES_SERVICE_HOST."
+  eirini-extensions.kube_service_port:
+    description: "Kubernetes service port. Should be set to the value of KUBERNETES_SERVICE_PORT."

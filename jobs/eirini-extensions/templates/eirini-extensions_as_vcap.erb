@@ -1,0 +1,25 @@
+#!/bin/bash -e
+
+run_dir=/var/vcap/sys/run/eirini-extensions
+log_dir=/var/vcap/sys/log/eirini-extensions
+conf_dir=/var/vcap/jobs/eirini-extensions/config
+pidfile=$run_dir/eirini-extensions.pid
+
+echo $$ > $pidfile
+
+export KUBERNETES_SERVICE_HOST="<%= p("eirini-extensions.kube_service_host") %>"
+export KUBERNETES_SERVICE_PORT="<%= p("eirini-extensions.kube_service_port") %>"
+
+exec /var/vcap/packages/eirini/bin/eirini-extensions \
+  --namespace <%= p("eirini-extensions.namespace") %> \
+ <% if_p("eirini-extensions.operator_webhook_host") do | operator_webhook_host | %>
+  --operator-webhook-host <%= operator_webhook_host %> \
+ <% end %>
+ <% if_p("eirini-extensions.operator_webhook_port") do | operator_webhook_port | %>
+  --operator-webhook-port <%= operator_webhook_port %> \
+ <% end %>
+ <% if_p("eirini-extensions.kubeconfig") do | kubeconfig | %>
+  --kubeconfig <%= namespace %> \
+ <% end %>
+  2> >(tee -a $log_dir/eirini-extensions.stderr.log | logger -p user.error -t vcap.eirini-extensions) \
+  1> >(tee -a $log_dir/eirini-extensions.stdout.log | logger -t vcap.eirini-extensions)

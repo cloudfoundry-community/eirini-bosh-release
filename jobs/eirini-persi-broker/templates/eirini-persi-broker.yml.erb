@@ -1,0 +1,36 @@
+<%=
+    plans = []
+    p("eirini-persi-broker.service_plans").each do |plan|
+        plans << {
+        "plan_id": plan["id"],
+        "plan_name": plan["name"],
+        "plan_description": plan["description"],
+        "kube_storage_class": plan["kube_storage_class"],
+        "free": plan["free"]
+        }
+    end
+    config = {
+        "service" : {
+            "service_name": p("eirini-persi-broker.service_name"),
+            "service_id": p("eirini-persi-broker.service_id"),
+            "plans": plans,
+            "description": p("eirini-persi-broker.description"),
+            "long_description": p("eirini-persi-broker.long_description"),
+            "provider_display_name": p("eirini-persi-broker.provider_display_name"),
+            "documentation_url": p("eirini-persi-broker.documentation_url"),
+            "support_url": p("eirini-persi-broker.support_url"),
+            "display_name": p("eirini-persi-broker.display_name"),
+            "icon_image": p("eirini-persi-broker.icon_image")
+        },    
+        "auth": {
+            "username": p("eirini-persi-broker.auth_username"),
+            "password": p("eirini-persi-broker.auth_password")
+        },
+        "backend_host": p("eirini-persi-broker.backend_host"),
+        "backend_port": p("eirini-persi-broker.backend_port"),
+        "namespace": p("eirini-persi-broker.namespace")
+    }
+
+    require 'yaml'
+    puts config.to_yaml
+%>

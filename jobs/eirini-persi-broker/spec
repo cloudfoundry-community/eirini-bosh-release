@@ -1,0 +1,55 @@
+---
+name: eirini-persi-broker
+
+templates:
+  eirini-persi-broker_ctl.erb: bin/eirini-persi-broker-ctl
+  eirini-persi-broker_as_vcap.erb: bin/eirini-persi-broker_as_vcap
+  eirini-persi-broker.yml.erb: config/eirini-persi-broker.yml
+
+packages:
+  - eirini-persi-broker
+
+properties:
+  eirini-persi-broker.namespace:
+    default: "eirini"
+    description: "Kubernetes namespace where to watch for Eirini applications."
+  eirini-persi-broker.kube_service_host:
+    description: "Kubernetes service host. Should be set to the value of KUBERNETES_SERVICE_HOST."
+  eirini-persi-broker.kube_service_port:
+    description: "Kubernetes service port. Should be set to the value of KUBERNETES_SERVICE_PORT."
+  eirini-persi-broker.service_plans:
+    description: "List of plans supported by broker"
+    default:
+    - id: default
+      name: "default"
+      description: "Existing default storage class"
+      kube_storage_class: "default"
+      free: true
+  eirini-persi-broker.service_name:
+    default: "eirini-persi-broker"
+    description: "name displayed for this broker service"
+  eirini-persi-broker.service_id:
+    description: "broker id"
+  eirini-persi-broker.description:
+    description: "short description of the broker"
+  eirini-persi-broker.long_description:
+    description: "long description of the broker"
+  eirini-persi-broker.provider_display_name:
+    description: "provider display name"
+  eirini-persi-broker.documentation_url:
+    description: "broker documentation url"
+  eirini-persi-broker.support_url:
+    description: "broker support url"
+  eirini-persi-broker.display_name:
+    description: "broker name display"
+  eirini-persi-broker.icon_image:
+    description: "broker icon image"
+  eirini-persi-broker.auth_username:
+    default: "admin"
+    description: "basic auth username to verify on incoming Service Broker requests"
+  eirini-persi-broker.auth_password:
+    description: "basic auth password to verify on incoming Service Broker requests"
+  eirini-persi-broker.backend_host:
+    description: "broker backend host"
+  eirini-persi-broker.backend_port:
+    description: "broker backend port"

@@ -29,27 +29,38 @@ properties:
     default: "eirini-persi-broker"
     description: "name displayed for this broker service"
   eirini-persi-broker.service_id:
+    default: "eirini-persi-broker"
     description: "broker id"
   eirini-persi-broker.description:
+    default: "Eirini persistence broker"
     description: "short description of the broker"
   eirini-persi-broker.long_description:
+    default: "Eirini persistence broker to provide Kubernete storage classes"
     description: "long description of the broker"
   eirini-persi-broker.provider_display_name:
+    default: "Eirini broker"
     description: "provider display name"
   eirini-persi-broker.documentation_url:
+    default: "https://github.com/SUSE/eirini-persi-broker"
     description: "broker documentation url"
   eirini-persi-broker.support_url:
+    default: "https://github.com/SUSE/eirini-persi-broker/issues"
     description: "broker support url"
   eirini-persi-broker.display_name:
+    default: "Eirini broker"
     description: "broker name display"
   eirini-persi-broker.icon_image:
+    default: "Eirini broker"
     description: "broker icon image"
   eirini-persi-broker.auth_username:
     default: "admin"
     description: "basic auth username to verify on incoming Service Broker requests"
   eirini-persi-broker.auth_password:
+    default: ""
     description: "basic auth password to verify on incoming Service Broker requests"
   eirini-persi-broker.backend_host:
+    default: ""
     description: "broker backend host"
   eirini-persi-broker.backend_port:
+    default: ""
     description: "broker backend port"

@@ -5,4 +5,4 @@ dependencies:
   - golang
 
 files:
-  - github.com/SUSE/eirini-extensions/cmd/eirini-ext/*.go
+  - github.com/SUSE/eirini-extensions/**/*

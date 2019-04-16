@@ -5,4 +5,4 @@ dependencies:
   - golang
 
 files:
-  - github.com/SUSE/eirini-persi-broker/cmd/broker/*.go
+  - github.com/SUSE/eirini-persi-broker/**/*

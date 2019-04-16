@@ -9,17 +9,10 @@ echo $$ > $pidfile
 
 export KUBERNETES_SERVICE_HOST="<%= p("eirini-extensions.kube_service_host") %>"
 export KUBERNETES_SERVICE_PORT="<%= p("eirini-extensions.kube_service_port") %>"
+export OPERATOR_WEBHOOK_HOST="<%= p("eirini-extensions.operator_webhook_host") %>"
+export OPERATOR_WEBHOOK_PORT="<%= p("eirini-extensions.operator_webhook_port") %>"
+export NAMESPACE="<%= p("eirini-extensions.namespace") %>"
 
-exec /var/vcap/packages/eirini/bin/eirini-extensions \
-  --namespace <%= p("eirini-extensions.namespace") %> \
- <% if_p("eirini-extensions.operator_webhook_host") do | operator_webhook_host | %>
-  --operator-webhook-host <%= operator_webhook_host %> \
- <% end %>
- <% if_p("eirini-extensions.operator_webhook_port") do | operator_webhook_port | %>
-  --operator-webhook-port <%= operator_webhook_port %> \
- <% end %>
- <% if_p("eirini-extensions.kubeconfig") do | kubeconfig | %>
-  --kubeconfig <%= namespace %> \
- <% end %>
+exec /var/vcap/packages/eirini-extensions/bin/eirini-extensions \
   2> >(tee -a $log_dir/eirini-extensions.stderr.log | logger -p user.error -t vcap.eirini-extensions) \
   1> >(tee -a $log_dir/eirini-extensions.stdout.log | logger -t vcap.eirini-extensions)

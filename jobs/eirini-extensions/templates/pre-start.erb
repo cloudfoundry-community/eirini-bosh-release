@@ -1,0 +1,16 @@
+#!/bin/bash
+
+conf_dir=/var/vcap/jobs/eirini-extensions/config
+mkdir -p $conf_dir
+
+set -e
+
+if [[ ! -z "$EIRINI_EIRINI_EXTENSIONS_SERVICE_HOST" ]];
+then
+  echo "export OPERATOR_WEBHOOK_HOST=$EIRINI_EIRINI_EXTENSIONS_SERVICE_HOST" > $conf_dir/env
+fi
+
+chown -R vcap $conf_dir
+chmod 600 $conf_dir/*
+
+echo 'pre-start finished!'

@@ -2,6 +2,7 @@
 name: eirini-extensions
 
 templates:
+  pre-start.erb: bin/pre-start
   eirini-extensions_ctl.erb: bin/eirini-extensions-ctl
   eirini-extensions_as_vcap.erb: bin/eirini-extensions_as_vcap
 
@@ -13,8 +14,8 @@ properties:
     default: "eirini"
     description: "Kubernetes namespace where to watch for Eirini applications."
   eirini-extensions.operator_webhook_host:
-    default: "localhost"
-    description: "Hostname/IP under which the webhook server can be reached from the cluster."
+    default: ""
+    description: "Hostname/IP under which the webhook server can be reached from the cluster (defaults to service)."
   eirini-extensions.operator_webhook_port:
     default: "2999"
     description: "Port the webhook server listens on."

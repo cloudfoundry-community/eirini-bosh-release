@@ -59,8 +59,8 @@ properties:
     default: ""
     description: "basic auth password to verify on incoming Service Broker requests"
   eirini-persi-broker.backend_host:
-    default: ""
+    default: "0.0.0.0"
     description: "broker backend host"
   eirini-persi-broker.backend_port:
-    default: ""
+    default: "8999"
     description: "broker backend port"

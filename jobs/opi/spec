@@ -5,6 +5,8 @@ templates:
   opi_ctl.erb: bin/opi_ctl
   opi_as_vcap.erb: bin/opi_as_vcap
   opi.yml.erb: config/opi.yml
+  kube.conf.erb: config/kube.conf
+  node_ca.crt.erb: config/node_ca.crt
   certs/cc-ca.crt.erb: certs/cc-ca.crt
   certs/cc.crt.erb: certs/cc.crt
   certs/cc.key.erb: certs/cc.key
@@ -57,3 +59,12 @@ properties:
     description: "Cloud Controller key"
   opi.cc_ca:
     description: "Cloud Controller CA cert"
+
+  opi.k8s.host_url:
+    description: "URL of k8s node"
+  opi.k8s.node_ca:
+    description: "CA certificate for k8s node"
+  opi.k8s.service_account.name:
+    description: "Username of service account Eirini will operate on k8s with"
+  opi.k8s.service_account.token:
+    description: "Token of service account Eirini will operate on k8s with"

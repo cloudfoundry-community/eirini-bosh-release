@@ -26,12 +26,6 @@ properties:
       kube_storage_class: "default"
       free: true
       default_size: "1Gi"
-  eirini-persi-broker.service_name:
-    default: "eirini-persi-broker"
-    description: "name displayed for this broker service"
-  eirini-persi-broker.service_id:
-    default: "eirini-persi-broker"
-    description: "broker id"
   eirini-persi-broker.description:
     default: "Eirini persistence broker"
     description: "short description of the broker"

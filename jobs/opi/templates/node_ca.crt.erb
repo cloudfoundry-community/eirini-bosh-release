@@ -1,1 +1,3 @@
-<%= p("opi.k8s.node_ca") %>
+<% if_p("opi.k8s.node_ca") do |node_ca| %>
+<%= node_ca %>
+<% end %>

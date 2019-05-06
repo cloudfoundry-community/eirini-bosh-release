@@ -1,0 +1,39 @@
+name: eirini
+version: 0.0.5
+commit_hash: 10ebcd2
+uncommitted_changes: false
+jobs:
+- name: eirinifs
+  version: d2bfa1403b133dfecc338e8e0b514e84cced79e0
+  fingerprint: d2bfa1403b133dfecc338e8e0b514e84cced79e0
+  sha1: 6ad65d60cc92e238e613de4b9f315b361b32d838
+- name: opi
+  version: 828855ed900d979a003b002e8f03abdb38dd9a9c
+  fingerprint: 828855ed900d979a003b002e8f03abdb38dd9a9c
+  sha1: 62bbb637807288966b9f0a25ce101559e43abd71
+packages:
+- name: eirini
+  version: 24c92469a8c02319017d455d4faea0175ad8fcc5
+  fingerprint: 24c92469a8c02319017d455d4faea0175ad8fcc5
+  sha1: 405ddcc1eae4a9e374dbc862ac5a7a01a1aa4a6a
+  dependencies:
+  - golang
+- name: eirinifs
+  version: fd956ac0c2a4675650a86720b19200c885b3825e
+  fingerprint: fd956ac0c2a4675650a86720b19200c885b3825e
+  sha1: f556aa425a34b54b1fb686d78f7cb05ee8215dd2
+  dependencies: []
+- name: golang
+  version: af5a137715fb4b3dad61c9ba2875884c639affa1
+  fingerprint: af5a137715fb4b3dad61c9ba2875884c639affa1
+  sha1: 60d155c98842690be928ac3f684b215b553a223a
+  dependencies: []
+- name: pid_utils
+  version: ec9c55b820794ee69bc28d7795fbd4d9c41c9499
+  fingerprint: ec9c55b820794ee69bc28d7795fbd4d9c41c9499
+  sha1: be35d0970f2d56023002fbfe86c3df4a4689c931
+  dependencies: []
+license:
+  version: 0598df3aa504eafdc95c94866f734b49a3570ee0
+  fingerprint: 0598df3aa504eafdc95c94866f734b49a3570ee0
+  sha1: 823a115f81cee7fd2e85100342b483d5e23d0ae6

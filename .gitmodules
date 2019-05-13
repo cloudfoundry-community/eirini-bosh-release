@@ -4,3 +4,9 @@
 [submodule "src/eirinifs"]
 	path = src/eirinifs
 	url = https://github.com/cloudfoundry-incubator/eirinifs.git
+[submodule "src/github.com/SUSE/eirini-persi-broker"]
+	path = src/github.com/SUSE/eirini-persi-broker
+	url = git@github.com:SUSE/eirini-persi-broker.git
+[submodule "src/github.com/SUSE/eirini-extensions"]
+	path = src/github.com/SUSE/eirini-extensions
+	url = git@github.com:SUSE/eirini-extensions.git

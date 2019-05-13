@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+run_dir=/var/vcap/sys/run/eirini-persi-broker
+log_dir=/var/vcap/sys/log/eirini-persi-broker
+conf_dir=/var/vcap/jobs/eirini-persi-broker/config
+pidfile=$run_dir/eirini-persi-broker.pid
+
+echo $$ > $pidfile
+
+export KUBERNETES_SERVICE_HOST="<%= p("eirini-persi-broker.kube_service_host") %>"
+export KUBERNETES_SERVICE_PORT="<%= p("eirini-persi-broker.kube_service_port") %>"
+export BROKER_CONFIG_PATH=$conf_dir/eirini-persi-broker.yml
+
+exec /var/vcap/packages/eirini-persi-broker/bin/eirini-persi-broker \
+  2> >(tee -a $log_dir/eirini-persi-broker.stderr.log | logger -p user.error -t vcap.eirini-persi-broker) \
+  1> >(tee -a $log_dir/eirini-persi-broker.stdout.log | logger -t vcap.eirini-persi-broker)

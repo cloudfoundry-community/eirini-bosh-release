@@ -1,0 +1,8 @@
+---
+name: eirini-persi-broker
+
+dependencies:
+  - golang
+
+files:
+  - github.com/SUSE/eirini-persi-broker/**/*

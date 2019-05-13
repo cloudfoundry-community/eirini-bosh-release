@@ -1,0 +1,8 @@
+---
+name: eirini-extensions
+
+dependencies:
+  - golang
+
+files:
+  - github.com/SUSE/eirini-extensions/**/*

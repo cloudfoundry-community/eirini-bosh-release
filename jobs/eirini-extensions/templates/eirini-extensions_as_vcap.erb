@@ -7,15 +7,9 @@ pidfile=$run_dir/eirini-extensions.pid
 
 echo $$ > $pidfile
 
-export OPERATOR_WEBHOOK_HOST="<%= p("eirini-extensions.operator_webhook_host") %>"
-
-if [ -z "$OPERATOR_WEBHOOK_HOST" ] && [[ -f "$conf_dir/env" ]];
-then
-  source $conf_dir/env
-fi
-
 export KUBERNETES_SERVICE_HOST="<%= p("eirini-extensions.kube_service_host") %>"
 export KUBERNETES_SERVICE_PORT="<%= p("eirini-extensions.kube_service_port") %>"
+export OPERATOR_WEBHOOK_HOST="<%= p("eirini-extensions.operator_webhook_host") %>"
 export OPERATOR_WEBHOOK_PORT="<%= p("eirini-extensions.operator_webhook_port") %>"
 export NAMESPACE="<%= p("eirini-extensions.namespace") %>"
 

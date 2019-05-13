@@ -2,7 +2,6 @@
 name: eirini-extensions
 
 templates:
-  pre-start.erb: bin/pre-start
   eirini-extensions_ctl.erb: bin/eirini-extensions-ctl
   eirini-extensions_as_vcap.erb: bin/eirini-extensions_as_vcap
 

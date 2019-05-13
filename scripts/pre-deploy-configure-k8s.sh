@@ -8,7 +8,7 @@ echo "Creating service account '$k8s_service_account'..."
 kubectl apply -f <(kubectl create serviceaccount $k8s_service_account -o yaml --save-config --dry-run)
 
 echo "Creating cluster-admin role binding for the service account..."
-kubectl apply -f <(kubectl create clusterrolebinding opi-cluster-admin --clusterrole=custer-admin --serviceaccount="default:$k8s_service_account" -o yaml --save-config --dry-run)
+kubectl apply -f <(kubectl create clusterrolebinding opi-cluster-admin --clusterrole=cluster-admin --serviceaccount="default:$k8s_service_account" -o yaml --save-config --dry-run)
 
 echo "Retrieving the service account's token secret..."
 service_account_token_secret="$(kubectl get serviceaccount ${k8s_service_account} -o jsonpath='{.secrets[0].name}')"

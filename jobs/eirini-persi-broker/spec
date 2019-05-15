@@ -2,8 +2,7 @@
 name: eirini-persi-broker
 
 templates:
-  eirini-persi-broker_ctl.erb: bin/eirini-persi-broker-ctl
-  eirini-persi-broker_as_vcap.erb: bin/eirini-persi-broker_as_vcap
+  bpm.yml.erb: config/bpm.yml
   eirini-persi-broker.yml.erb: config/eirini-persi-broker.yml
 
 packages:

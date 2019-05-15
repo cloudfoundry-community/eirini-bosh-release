@@ -1,0 +1,10 @@
+processes:
+  - name: eirini-extensions
+    executable: /var/vcap/packages/eirini-extensions/bin/eirini-extensions
+    args: []
+    env:
+      KUBERNETES_SERVICE_HOST: "<%= p("eirini-extensions.kube_service_host") %>"
+      KUBERNETES_SERVICE_PORT: "<%= p("eirini-extensions.kube_service_port") %>"
+      OPERATOR_WEBHOOK_HOST: "<%= p("eirini-extensions.operator_webhook_host") %>"
+      OPERATOR_WEBHOOK_PORT: "<%= p("eirini-extensions.operator_webhook_port") %>"
+      NAMESPACE: "<%= p("eirini-extensions.namespace") %>"

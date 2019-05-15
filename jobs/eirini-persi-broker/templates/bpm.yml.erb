@@ -1,0 +1,8 @@
+processes:
+  - name: eirini-persi-broker
+    executable: /var/vcap/packages/eirini-persi-broker/bin/eirini-persi-broker
+    args: []
+    env:
+      KUBERNETES_SERVICE_HOST: "<%= p("eirini-persi-broker.kube_service_host") %>"
+      KUBERNETES_SERVICE_PORT: "<%= p("eirini-persi-broker.kube_service_port") %>"
+      BROKER_CONFIG_PATH: /var/vcap/jobs/eirini-persi-broker/config/eirini-persi-broker.yml

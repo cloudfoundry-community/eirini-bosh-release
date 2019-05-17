@@ -24,17 +24,17 @@ spec:
               key: internal-ca-cert
               name: "<%= p('scf.secrets_generation_name') %>"
         - name: REGISTRY
-          value: "<%= p('scf.eirini.registry.address') %>"
+          value: "<%= p('eirini.registry.address') %>"
         - name: SCF_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: "<%= p('scf.eirini.cert_copier_image') %>"
+        image: "<%= p('eirini.cert_copier_image') %>"
         volumeMounts:
         - name: host-docker
           mountPath: /workspace/docker
       - name: config-copier
-        image: "<%= p('scf.eirini.cert_copier_image') %>"
+        image: "<%= p('eirini.cert_copier_image') %>"
         command: [ "/bin/sh", "-c", "cp /input/fluent.conf /output" ]
         volumeMounts:
         - name: fluentd-conf
@@ -44,7 +44,7 @@ spec:
           readOnly: false
       containers:
       - name: eirini-loggregator-fluentd
-        image: <%= p('scf.eirini.fluentd_image') %>
+        image: <%= p('eirini.fluentd_image') %>
         imagePullPolicy: Always
         env:
         - name: FLUENT_UID
@@ -82,9 +82,9 @@ spec:
         - name: AGENT_METRIC_SOURCE_ID
           value: scf/daemonset/loggregator-fluentd
         - name: ROUTER_ADDR
-          value: <%= p('scf.eirini.doppler_address') %>
+          value: <%= p('eirini.doppler_address') %>
         - name: ROUTER_ADDR_WITH_AZ
-          value: <%= p('scf.eirini.doppler_address_with_az') %>
+          value: <%= p('eirini.doppler_address_with_az') %>
         - name: AGENT_PPROF_PORT
           value: "6062"
         - name: AGENT_HEALTH_ENDPOINT_PORT

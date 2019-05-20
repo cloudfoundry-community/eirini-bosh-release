@@ -1,8 +1,0 @@
----
-name: fluentd-conf
-
-description: This job creates the configuration for fluentd as a ConfigMap
-
-templates
-  #pre-start.erb: bin/pre-start
-  fluentd-conf.erb: /fluentd/etc/fluent.conf

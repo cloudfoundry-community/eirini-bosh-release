@@ -3,7 +3,7 @@ name: configure-eirini
 
 description: This job creates and configures components needed for Eirini (e.g. fluentd)
 
-templates
+templates:
   run.erb: bin/run
   eirini-daemonset.yaml.erb: config/eirini-daemonset.yaml
   fluentd-configmap.yaml.erb: config/fluentd-configmap.yaml

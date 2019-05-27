@@ -1,21 +1,36 @@
 opi:
   kube_namespace: <%= p("opi.kube_namespace") %>
+
   nats_ip: <%= p("opi.nats_ip") %>
+  nats_port: <%= p("opi.nats_port") %>
   nats_password: <%= p("opi.nats_password") %>
+
   cc_certs_secret_name: <%= p("opi.certs_secret_name") %>
   cc_internal_api: <%= p("opi.cc_internal_api") %>
   cc_uploader_ip: <%= p("opi.cc_uploader_ip") %>
+
   registry_address: <%= p("opi.registry_address") %>
   eirini_address: <%= p("opi.eirini_address", "http://" + spec.ip + ":8085") %>
   stager_image: <%= p("opi.stager_image") %>
   metrics_source_address: <%= p("opi.metrics_source_address") %>
+
   loggregator_address: <%= p("opi.loggregator_address") %>
   loggergator_cert_path: /var/vcap/jobs/opi/certs/doppler.crt
   loggregator_key_path: /var/vcap/jobs/opi/certs/doppler.key
   loggregator_ca_path: /var/vcap/jobs/opi/certs/doppler-ca.crt
+
   cc_cert_path: /var/vcap/jobs/opi/certs/cc.crt
   cc_key_path: /var/vcap/jobs/opi/certs/cc.key
   cc_ca_path: /var/vcap/jobs/opi/certs/cc-ca.crt
+
+  tls_port: <%= p("opi.tls_port") %>
+
+<% if_p("opi.client_ca", "opi.server_cert", "opi.server_key") do %>
+  client_ca_path: /var/vcap/jobs/opi/certs/client-ca.crt
+  server_cert_path: /var/vcap/jobs/opi/certs/server.crt
+  server_key_path: /var/vcap/jobs/opi/certs/server.key
+<% end %>
+
 <% if_p("opi.k8s.host_url", "opi.k8s.node_ca", "opi.k8s.service_account.name", "opi.k8s.service_account.token") do %>
   kube_config_path: /var/vcap/jobs/opi/config/kube.conf
 <% end.else do %>

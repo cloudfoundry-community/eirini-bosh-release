@@ -5,7 +5,7 @@ set -euo pipefail
 LB_CA_CERT="$1"
 SYSTEM_DOMAIN="$2"
 
-BOSH_ENV_NAME="$(bosh env --json | jq .Tables[0].Rows[0].name -r)"
+BOSH_ENV_NAME="${BOSH_ENV_NAME:-$(bosh env --json | jq .Tables[0].Rows[0].name -r)}"
 DOPPLER_ADDRESS="$(bosh -d cf vms | grep doppler | cut -d$'\t' -f4 | head -n 1)"
 
 echo "Creating secret for the load balancer CA cert..."
@@ -66,10 +66,13 @@ spec:
 EOD)
 
 echo "Creating loggregator certs secret..."
-kubectl create secret generic loggregator-tls-certs-secret \
+kubectl apply -f <(kubectl create secret generic loggregator-tls-certs-secret \
   --from-literal=internal-ca-cert="$(credhub get -n /${BOSH_ENV_NAME}/cf/loggregator_tls_agent -j | jq -r .value.ca)" \
   --from-literal=loggregator-agent-cert-key="$(credhub get -n /${BOSH_ENV_NAME}/cf/loggregator_tls_agent -j | jq -r .value.private_key)" \
-  --from-literal=loggregator-agent-cert="$(credhub get -n /${BOSH_ENV_NAME}/cf/loggregator_tls_agent -j | jq -r .value.certificate)"
+  --from-literal=loggregator-agent-cert="$(credhub get -n /${BOSH_ENV_NAME}/cf/loggregator_tls_agent -j | jq -r .value.certificate)" \
+  --dry-run \
+  --save-config \
+  -o yaml)
 
 echo "Creating loggregator fluentd ConfigMap..."
 kubectl apply -f <(cat <<EOD
@@ -169,6 +172,8 @@ spec:
           mountPath: /var/log
         - name: containers
           mountPath: /var/lib/docker/containers
+        - name: bosh-docker-containers
+          mountPath: /var/vcap/store/docker/docker/containers
         - name: config-volume
           mountPath: /fluentd/etc/
           readOnly: false
@@ -209,6 +214,9 @@ spec:
       - name: containers
         hostPath:
           path: /var/lib/docker/containers
+      - name: bosh-docker-containers
+        hostPath:
+          path: /var/vcap/store/docker/docker/containers
       - name: fluentd-conf
         configMap:
           name: fluentd-conf

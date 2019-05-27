@@ -2,11 +2,7 @@
 
 set -e
 
-VERSION=v1.13.2
-
-echo Retrieving kubetcl ${VERSION}
-
-curl -LO https://storage.googleapis.com/kubernetes-release/release/${VERSION}/bin/linux/amd64/kubectl
+echo Installing kubectl ${VERSION}
 
 BIN_DIR=${BOSH_INSTALL_TARGET}/bin
 

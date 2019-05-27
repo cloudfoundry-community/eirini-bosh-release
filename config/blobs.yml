@@ -6,3 +6,7 @@ golang/go1.12.4.linux-amd64.tar.gz:
   size: 127928770
   object_id: 9245fce7-c63f-4712-6e42-7c6ca236b8b5
   sha: 8d9a4c21109f6e0c5ee19cc8e74ad12473b36b0e
+kubectl:
+  size: 39251424
+  object_id: 70258508-8969-45a3-67ca-5306f7459461
+  sha: 96c123c1c7d90eb0cd7224efd10340f5fd714c85

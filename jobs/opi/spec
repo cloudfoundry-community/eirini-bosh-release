@@ -2,9 +2,7 @@
 name: opi
 
 templates:
-  opi_ctl.erb: bin/opi_ctl
-  opi_as_vcap.erb: bin/opi_as_vcap
-
+  bpm.yml.erb: config/bpm.yml
   opi.yml.erb: config/opi.yml
   kube.conf.erb: config/kube.conf
   node_ca.crt.erb: config/node_ca.crt

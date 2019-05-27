@@ -1,0 +1,9 @@
+processes:
+  - name: opi
+    executable: /var/vcap/packages/eirini/bin/opi
+    args:
+    - connect
+    - --config=/var/vcap/jobs/opi/config/opi.yml
+    env:
+      KUBERNETES_SERVICE_HOST: "<%= p("opi.kube_service_host") %>"
+      KUBERNETES_SERVICE_PORT: "<%= p("opi.kube_service_port") %>"

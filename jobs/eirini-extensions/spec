@@ -2,8 +2,7 @@
 name: eirini-extensions
 
 templates:
-  eirini-extensions_ctl.erb: bin/eirini-extensions-ctl
-  eirini-extensions_as_vcap.erb: bin/eirini-extensions_as_vcap
+  bpm.yml.erb: config/bpm.yml
 
 packages:
   - eirini-extensions

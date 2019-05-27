@@ -1,5 +1,5 @@
 check process eirini-persi-broker
-  with pidfile /var/vcap/sys/run/eirini-persi-broker/eirini-persi-broker.pid
-  start program "/var/vcap/jobs/eirini-persi-broker/bin/eirini-persi-broker-ctl start"
-  stop program "/var/vcap/jobs/eirini-persi-broker/bin/eirini-persi-broker-ctl stop"
+  with pidfile /var/vcap/sys/run/bpm/eirini-persi-broker/eirini-persi-broker.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start eirini-persi-broker"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop eirini-persi-broker"
   group vcap

@@ -2,7 +2,9 @@
 
 status "Configuring Eirini"
 
-scf_secrets="$(/var/vcap/packages/kubectl/bin/kubectl get secret "<%= p("scf.secrets_generation_name") %>" --namespace="$KUBERNETES_NAMESPACE" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
+kubectl=/var/vcap/packages/kubectl/bin/kubectl
+
+scf_secrets="$(${kubectl} get secret "<%= p("scf.secrets_generation_name") %>" --namespace="$KUBERNETES_NAMESPACE" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
 cat <<EOT >> secret.yml
 ---
 apiVersion: v1
@@ -14,12 +16,12 @@ data:
 ${scf_secrets}
 EOT
 
-# TODO: Create eh scf.eirini.namespace if it doesn't exist?
+$kubectl get namespace "<%= p("scf.eirini.namespace") %>" || $kubectl create namespace "<%= p("scf.eirini.namespace") %>"
 
-/var/vcap/packages/kubectl/bin/kubectl apply -f secret.yml --namespace "<%= p("scf.eirini.namespace") %>"
+$kubectl apply -f secret.yml --namespace "<%= p("scf.eirini.namespace") %>"
 
 status "Setting up fluentd configuration"
-/var/vcap/packages/kubectl/bin/kubectl apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml
+$kubect apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml
 
 status "Setting up Eirini daemonsets"
-/var/vcap/packages/kubectl/bin/kubectl apply -f /var/vcap/jobs/configure-eirini/config/eirini-daemonset.yaml
+$kubectl apply -f /var/vcap/jobs/configure-eirini/config/eirini-daemonset.yaml

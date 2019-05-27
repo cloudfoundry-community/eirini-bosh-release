@@ -4,15 +4,20 @@ name: opi
 templates:
   opi_ctl.erb: bin/opi_ctl
   opi_as_vcap.erb: bin/opi_as_vcap
+
   opi.yml.erb: config/opi.yml
   kube.conf.erb: config/kube.conf
   node_ca.crt.erb: config/node_ca.crt
+
   certs/cc-ca.crt.erb: certs/cc-ca.crt
   certs/cc.crt.erb: certs/cc.crt
   certs/cc.key.erb: certs/cc.key
+  certs/client-ca.crt.erb: certs/client-ca.crt
   certs/doppler-ca-crt.erb: certs/doppler-ca.crt
   certs/doppler.crt.erb: certs/doppler.crt
   certs/doppler.key.erb: certs/doppler.key
+  certs/server.crt.erb: certs/server.crt
+  certs/server.key.erb: certs/server.key
 
 packages:
   - pid_utils
@@ -33,7 +38,10 @@ properties:
   opi.nats_password:
     description: "password for nats"
   opi.nats_ip:
-    description: "nats_ip"
+    description: "IP of the NATS server Eirini will send app route events to"
+  opi.nats_port:
+    description: "Port of the NATS server Eirini will send app route events to"
+    default: 4222
   opi.certs_secret_name:
     description: "Name of the kube secret containing SCF certs"
     default: "scf-credentials"
@@ -59,6 +67,16 @@ properties:
     description: "Cloud Controller key"
   opi.cc_ca:
     description: "Cloud Controller CA cert"
+
+  opi.server_cert:
+    description: "TLS certificate for Eirini server"
+  opi.server_key:
+    description: "Private key associated with TLS certificate for Eirini server"
+  opi.client_ca:
+    description: "CA certificate Eirini will use to trust client certificates for mTLS"
+  opi.tls_port:
+    description: "Port Eirini server will listen on when TLS is enabled"
+    default: 8484
 
   opi.k8s.host_url:
     description: "URL of k8s node"

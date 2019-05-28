@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+echo Installing kubectl ${VERSION}
+
+BIN_DIR=${BOSH_INSTALL_TARGET}/bin
+
+mkdir -p ${BIN_DIR}
+
+cp kubectl ${BIN_DIR}/kubectl
+chmod 755  ${BIN_DIR}/kubectl

@@ -1,0 +1,24 @@
+---
+name: configure-eirini
+
+description: Creates and configures components needed for Eirini (e.g. fluentd)
+
+packages:
+  - kubectl
+
+templates:
+  run.erb: bin/run
+  eirini-daemonset.yaml.erb: config/eirini-daemonset.yaml
+  fluentd-configmap.yaml.erb: config/fluentd-configmap.yaml
+
+properties:
+  eirini.fluentd_image:
+    description: "The docker image used by Eirini to consume Kubernetes container logs"
+  eirini.cert_copier_image:
+    description: "The docker image used by Eirini to register the image registry CA cert with Docker, on each Kubernetes node"
+  eirini.doppler_address:
+    description: "SCF's doppler address, used to stream application logs"
+  eirini.doppler_address_with_az:
+    description: "SCF's doppler address for the current AZ, used to stream application logs"
+  eirini.registry.address:
+    description: "Eirini's image registry public address"

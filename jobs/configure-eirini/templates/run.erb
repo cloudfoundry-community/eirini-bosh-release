@@ -1,0 +1,27 @@
+#!/bin/bash
+
+status "Configuring Eirini"
+
+kubectl=/var/vcap/packages/kubectl/bin/kubectl
+
+scf_secrets="$(${kubectl} get secret "<%= p("scf.secrets_generation_name") %>" --namespace="$KUBERNETES_NAMESPACE" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
+cat <<EOT >> secret.yml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: scf-credentials
+type: Opaque
+data:
+${scf_secrets}
+EOT
+
+$kubectl get namespace "<%= p("scf.eirini.namespace") %>" || $kubectl create namespace "<%= p("scf.eirini.namespace") %>"
+
+$kubectl apply -f secret.yml --namespace "<%= p("scf.eirini.namespace") %>"
+
+status "Setting up fluentd configuration"
+$kubect apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml
+
+status "Setting up Eirini daemonsets"
+$kubectl apply -f /var/vcap/jobs/configure-eirini/config/eirini-daemonset.yaml

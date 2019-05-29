@@ -1,1 +1,3 @@
-<%= p("opi.client_ca") %>
+<% if_p("opi.client_ca") do |client_ca| %>
+<%= client_ca %>
+<% end %>

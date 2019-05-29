@@ -1,1 +1,3 @@
-<%= p("opi.server_cert") %>
+<% if_p("opi.server_cert") do |server_cert| %>
+<%= server_cert %>
+<% end %>

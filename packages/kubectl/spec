@@ -1,4 +1,4 @@
 ---
 name: kubectl
 files:
-- kubectl
+- kubectl-v*

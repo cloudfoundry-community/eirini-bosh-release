@@ -11,14 +11,26 @@ templates:
   eirini-daemonset.yaml.erb: config/eirini-daemonset.yaml
   fluentd-configmap.yaml.erb: config/fluentd-configmap.yaml
 
+  loggregator-ca.crt.erb: config/loggregator-ca.crt
+  loggregator-agent.crt.erb: config/loggregator-agent.crt
+  loggregator-agent.key.erb: config/loggregator-agent.key
+
 properties:
   eirini.fluentd_image:
     description: "The docker image used by Eirini to consume Kubernetes container logs"
-  eirini.cert_copier_image:
-    description: "The docker image used by Eirini to register the image registry CA cert with Docker, on each Kubernetes node"
+  eirini.config_copier_image:
+    description: "The docker image used to copy the fluentd config to an accessible volume mount"
   eirini.doppler_address:
-    description: "SCF's doppler address, used to stream application logs"
+    description: "CF's doppler address, used to stream application logs"
   eirini.doppler_address_with_az:
-    description: "SCF's doppler address for the current AZ, used to stream application logs"
-  eirini.registry.address:
-    description: "Eirini's image registry public address"
+    description: "CF's doppler address for the current AZ, used to stream application logs"
+  eirini.namespace:
+    description: "Kubernetes namespace that Eirini has been configured to target"
+  eirini.service_account:
+    description: "The service account used by fluentd to access pod information"
+  loggregator.ca-cert:
+    description: "CA certificate that is signing the server certificate of the target doppler and loggregator agent"
+  loggregator.agent-cert:
+    description: "Certificate of the loggregator agent"
+  loggregator.agent-cert-key:
+    description: "Private key of the loggregator agent"

@@ -21,7 +21,7 @@ $kubectl get namespace "<%= p("scf.eirini.namespace") %>" || $kubectl create nam
 $kubectl apply -f secret.yml --namespace "<%= p("scf.eirini.namespace") %>"
 
 status "Setting up fluentd configuration"
-$kubect apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml
+$kubectl apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml
 
 status "Setting up Eirini daemonsets"
 $kubectl apply -f /var/vcap/jobs/configure-eirini/config/eirini-daemonset.yaml

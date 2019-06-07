@@ -8,3 +8,14 @@ processes:
       OPERATOR_WEBHOOK_HOST: "<%= p("eirini-extensions.operator_webhook_host") %>"
       OPERATOR_WEBHOOK_PORT: "<%= p("eirini-extensions.operator_webhook_port") %>"
       NAMESPACE: "<%= p("eirini-extensions.namespace") %>"
+    <% if properties.opi&.k8s&.host_url.nil? %>
+    # The ServiceAccount admission controller has to be enabled.
+    # https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod
+    additional_volumes:
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/token
+      mount_only: true
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      mount_only: true
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/namespace
+      mount_only: true
+    <% end %>

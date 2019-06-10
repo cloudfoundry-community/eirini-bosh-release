@@ -1,0 +1,68 @@
+name: eirini
+version: 0.0.7
+commit_hash: fbba332
+uncommitted_changes: false
+jobs:
+- name: configure-eirini
+  version: e7b230ba6111835c590a50d94066633da883f180
+  fingerprint: e7b230ba6111835c590a50d94066633da883f180
+  sha1: 561ea7eb64ae1df4995175f81a5728e5685004dd
+- name: eirini-extensions
+  version: e92b1501d9666af943d9d51a45fbf7fc55675eee
+  fingerprint: e92b1501d9666af943d9d51a45fbf7fc55675eee
+  sha1: e3ea798bf49ac1afa8cd649670a2907d32b68ad5
+- name: eirini-persi-broker
+  version: 16d3025c0a559858348e27189f0d01b23c99d435
+  fingerprint: 16d3025c0a559858348e27189f0d01b23c99d435
+  sha1: 50a5b5d85ade3ede23a23f3867e0e460fa585170
+- name: eirinifs
+  version: d2bfa1403b133dfecc338e8e0b514e84cced79e0
+  fingerprint: d2bfa1403b133dfecc338e8e0b514e84cced79e0
+  sha1: 6ad65d60cc92e238e613de4b9f315b361b32d838
+- name: opi
+  version: 0026e2fa3050e465d45c4da2938a637c57a12256
+  fingerprint: 0026e2fa3050e465d45c4da2938a637c57a12256
+  sha1: 08e1d9d9ad6c5bc3852cb09b5d2d2199ccbf4c1f
+packages:
+- name: eirini
+  version: 9187964085687e5a3f9da623e77221205b3542d0
+  fingerprint: 9187964085687e5a3f9da623e77221205b3542d0
+  sha1: f5e30a16ee759cdcdadbf42543fb96296b1a47f2
+  dependencies:
+  - golang
+- name: eirini-extensions
+  version: 8084389890d3005380f39042be032b89680c73fe
+  fingerprint: 8084389890d3005380f39042be032b89680c73fe
+  sha1: d55c2caa3369165ea2731eea7dc14de7662ba796
+  dependencies:
+  - golang
+- name: eirini-persi-broker
+  version: 9ec016381658604d2f3163b1432ef912fa83c864
+  fingerprint: 9ec016381658604d2f3163b1432ef912fa83c864
+  sha1: f9d7bf406f9f3585bfe3bd1c7042f3aeb3d6b1bb
+  dependencies:
+  - golang
+- name: eirinifs
+  version: 5bc2708d858ffc4497c0e136de9a5186dc1b735d
+  fingerprint: 5bc2708d858ffc4497c0e136de9a5186dc1b735d
+  sha1: 9238bad76c067a60ddc6f18bb518f2c8f667be80
+  dependencies: []
+- name: golang
+  version: af5a137715fb4b3dad61c9ba2875884c639affa1
+  fingerprint: af5a137715fb4b3dad61c9ba2875884c639affa1
+  sha1: 60d155c98842690be928ac3f684b215b553a223a
+  dependencies: []
+- name: kubectl
+  version: 2c4dd91aa3e6e0f4272b83cdb90d6cb3971cf279
+  fingerprint: 2c4dd91aa3e6e0f4272b83cdb90d6cb3971cf279
+  sha1: 11b976d03f474077bba027b5a28b2f68860d182c
+  dependencies: []
+- name: pid_utils
+  version: ec9c55b820794ee69bc28d7795fbd4d9c41c9499
+  fingerprint: ec9c55b820794ee69bc28d7795fbd4d9c41c9499
+  sha1: be35d0970f2d56023002fbfe86c3df4a4689c931
+  dependencies: []
+license:
+  version: 0598df3aa504eafdc95c94866f734b49a3570ee0
+  fingerprint: 0598df3aa504eafdc95c94866f734b49a3570ee0
+  sha1: 823a115f81cee7fd2e85100342b483d5e23d0ae6

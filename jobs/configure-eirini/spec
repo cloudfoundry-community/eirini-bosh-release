@@ -14,6 +14,10 @@ templates:
 properties:
   eirini.fluentd_image:
     description: "The docker image used by Eirini to consume Kubernetes container logs"
+  eirini.fluentd.varlog_hostpath:
+    description: "The directory where the logs are stored on the node when on hostPath"
+  eirini.fluentd.varlog_hostpath_mount_point:
+    description: "The path inside the fluentd pot where the log_hostpath should be mounted"
   eirini.cert_copier_image:
     description: "The docker image used by Eirini to register the image registry CA cert with Docker, on each Kubernetes node"
   eirini.doppler_address:

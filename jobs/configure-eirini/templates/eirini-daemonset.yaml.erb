@@ -58,8 +58,10 @@ spec:
         volumeMounts:
         - name: vardata
           mountPath: /var/data
+        <% if_p("eirini.fluentd.varlog_hostpath","eirini.fluentd.varlog_hostpath_mount_point") do |_, mount_point| %>
         - name: varlog
-          mountPath: /var/log
+          mountPath: <%= mount_point %>
+        <% end %>
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
@@ -98,12 +100,14 @@ spec:
           readOnly: true
       terminationGracePeriodSeconds: 30
       volumes:
+      <% if_p("eirini.fluentd.varlog_hostpath") do |varlog_hostpath| %>
+      - name: varlog
+        hostPath:
+          path: <%= varlog_hostpath %>
+      <% end %>
       - name: vardata
         hostPath:
           path: /var/data
-      - name: varlog
-        hostPath:
-          path: /var/log
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers

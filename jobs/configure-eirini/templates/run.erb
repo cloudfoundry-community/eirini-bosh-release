@@ -4,7 +4,7 @@ status "Configuring Eirini"
 
 kubectl=/var/vcap/packages/kubectl/bin/kubectl
 
-scf_secrets="$(${kubectl} get secret "<%= p("scf.secrets_generation_name") %>" --namespace="$KUBERNETES_NAMESPACE" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
+scf_secrets="$(${kubectl} get secret "<%= p("eirini.secrets_name") %>" --namespace="$KUBERNETES_NAMESPACE" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
 cat <<EOT >> secret.yml
 ---
 apiVersion: v1

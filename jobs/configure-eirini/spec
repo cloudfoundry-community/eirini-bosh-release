@@ -26,3 +26,5 @@ properties:
     description: "SCF's doppler address for the current AZ, used to stream application logs"
   eirini.registry.address:
     description: "Eirini's image registry public address"
+  eirini.secrets_name:
+    description: "The name of the kube secret where certificates are stored"

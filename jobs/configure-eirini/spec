@@ -12,19 +12,27 @@ templates:
   fluentd-configmap.yaml.erb: config/fluentd-configmap.yaml
 
 properties:
-  eirini.fluentd_image:
-    description: "The docker image used by Eirini to consume Kubernetes container logs"
-  eirini.fluentd.varlog_hostpath:
-    description: "The directory where the logs are stored on the node when on hostPath"
-  eirini.fluentd.varlog_hostpath_mount_point:
-    description: "The path inside the fluentd pot where the log_hostpath should be mounted"
   eirini.cert_copier_image:
     description: "The docker image used by Eirini to register the image registry CA cert with Docker, on each Kubernetes node"
   eirini.doppler_address:
     description: "SCF's doppler address, used to stream application logs"
   eirini.doppler_address_with_az:
     description: "SCF's doppler address for the current AZ, used to stream application logs"
-  eirini.registry.address:
-    description: "Eirini's image registry public address"
-  eirini.secrets_name:
-    description: "The name of the kube secret where certificates are stored"
+  eirini.fluentd_image:
+    description: "The docker image used by Eirini to consume Kubernetes container logs"
+  eirini.fluentd.varlog_hostpath:
+    description: "The directory where the logs are stored on the node when on hostPath"
+  eirini.fluentd.varlog_hostpath_mount_point:
+    description: "The path inside the fluentd pot where the log_hostpath should be mounted"
+  eirini.source_secrets_namespace:
+    description: "The namespace where the source_secrets live"
+  eirini.source_secrets_name:
+    description: "The kube secrets holding the certs Eirini needs to talk to CF"
+  opi.certs_secret_name:
+    description: "Name of the kube secret containing CF certs. It should live in the opi.kube_namespace."
+    default: "cf_secrets"
+  opi.kube_namespace:
+    default: "default"
+    description: "Kubernetes namespace where to run deployments and tasks"
+  opi.registry_address:
+    description: "Address of registry"

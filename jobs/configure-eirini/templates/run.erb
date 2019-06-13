@@ -1,24 +1,35 @@
 #!/bin/bash
 
+status() {
+    local fmt="${1}"
+    shift
+    printf "\n%b${fmt}%b\n" "\033[0;32m" "$@" "\033[0m"
+}
+
 status "Configuring Eirini"
 
 kubectl=/var/vcap/packages/kubectl/bin/kubectl
 
-scf_secrets="$(${kubectl} get secret "<%= p("eirini.secrets_name") %>" --namespace="$KUBERNETES_NAMESPACE" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
+status "Making sure the Eirini namespace exists"
+$kubectl get namespace "<%= p("opi.kube_namespace") %>" || $kubectl create namespace "<%= p("opi.kube_namespace") %>"
+
+<% if_p("eirini.source_secrets_namespace", "eirini.source_secrets_name") do |source_secrets_namespace, source_secrets_name| %>
+
+status "Copying cc secrets to the Eirini namespace"
+secrets="$(${kubectl} get secret "<%= source_secrets_name %>" --namespace="<%= source_secrets_namespace %>" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
 cat <<EOT >> secret.yml
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: scf-credentials
+  name: <%= p("opi.certs_secret_name") %>
 type: Opaque
 data:
-${scf_secrets}
+${secrets}
 EOT
 
-$kubectl get namespace "<%= p("scf.eirini.namespace") %>" || $kubectl create namespace "<%= p("scf.eirini.namespace") %>"
-
-$kubectl apply -f secret.yml --namespace "<%= p("scf.eirini.namespace") %>"
+$kubectl apply -f secret.yml --namespace "<%= p("opi.kube_namespace") %>"
+<% end %>
 
 status "Setting up fluentd configuration"
 $kubectl apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml

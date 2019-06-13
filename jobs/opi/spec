@@ -41,8 +41,8 @@ properties:
     description: "Port of the NATS server Eirini will send app route events to"
     default: 4222
   opi.certs_secret_name:
-    description: "Name of the kube secret containing SCF certs"
-    default: "scf-credentials"
+    description: "Name of the kube secret containing CF certs"
+    default: "cf_secrets"
   opi.cc_internal_api:
     description: "Internal URL for the Cloud Controller"
   opi.cc_uploader_ip:

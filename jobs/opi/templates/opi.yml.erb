@@ -11,7 +11,10 @@ opi:
 
   registry_address: <%= p("opi.registry_address") %>
   eirini_address: <%= p("opi.eirini_address", "http://" + spec.ip + ":8085") %>
-  stager_image: <%= p("opi.stager_image") %>
+  downloader_image: <%= p("opi.downloader_image") %>
+  uploader_image: <%= p("opi.uploader_image") %>
+  executor_image: <%= p("opi.executor_image") %>
+
   metrics_source_address: <%= p("opi.metrics_source_address") %>
 
   loggregator_address: <%= p("opi.loggregator_address") %>

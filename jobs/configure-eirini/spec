@@ -16,6 +16,8 @@ templates:
   loggregator-agent.key.erb: config/loggregator-agent.key
 
 properties:
+  eirini.loggregator_agent_image:
+    description: "The docker image used by Eirini to forward Kubernetes container logs"
   eirini.fluentd_image:
     description: "The docker image used by Eirini to consume Kubernetes container logs"
   eirini.config_copier_image:

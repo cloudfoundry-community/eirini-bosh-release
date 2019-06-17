@@ -30,7 +30,7 @@ data:
       loggregator_ca_file /fluentd/certs/ca.crt
       eirini_namespace <%= p("opi.kube_namespace") %>
     </match>
-    <match kubernetes.var.log.containers.**eirini**.log>
+    <match kubernetes.var.log.containers.**<%= p("opi.kube_namespace") %>**.log>
       @type stdout
     </match>
     <match kubernetes.var.log.containers.**.log>

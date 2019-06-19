@@ -23,7 +23,7 @@ data:
       @type kubernetes_metadata
     </filter>
     <match **>
-      type loggregator
+      @type loggregator
       loggregator_target localhost:3458
       loggregator_cert_file /fluentd/certs/agent.crt
       loggregator_key_file /fluentd/certs/agent.key

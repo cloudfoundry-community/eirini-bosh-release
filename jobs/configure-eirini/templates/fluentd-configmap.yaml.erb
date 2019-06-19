@@ -28,9 +28,9 @@ data:
       loggregator_cert_file /fluentd/certs/agent.crt
       loggregator_key_file /fluentd/certs/agent.key
       loggregator_ca_file /fluentd/certs/ca.crt
-      eirini_namespace <%= p("eirini.namespace") %>
+      eirini_namespace <%= p("opi.workloads_namespace") %>
     </match>
-    <match kubernetes.var.log.containers.**<%= p("eirini.namespace") %>**.log>
+    <match kubernetes.var.log.containers.**<%= p("opi.workloads_namespace") %>**.log>
       @type stdout
     </match>
     <match kubernetes.var.log.containers.**.log>

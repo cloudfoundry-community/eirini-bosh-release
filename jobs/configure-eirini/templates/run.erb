@@ -7,7 +7,10 @@ echo "Configuring Eirini"
 export KUBECONFIG="/var/vcap/jobs/opi/config/kube.conf"
 kubectl="/var/vcap/packages/kubectl/bin/kubectl"
 
+$kubectl apply -f <(kubectl create namespace "<%= p('opi.system_namespace') %>" --dry-run --save-config -o yaml)
+
 $kubectl apply -f <($kubectl create secret generic loggregator-tls-certs-secret \
+  -n "<%= p('opi.system_namespace') %>" \
   --dry-run \
   --save-config \
   --from-file=internal-ca-cert=/var/vcap/jobs/configure-eirini/config/loggregator-ca.crt \
@@ -16,7 +19,7 @@ $kubectl apply -f <($kubectl create secret generic loggregator-tls-certs-secret 
   -o yaml)
 
 echo "Setting up fluentd configuration"
-$kubectl apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml
+$kubectl apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml -n "<%= p('opi.system_namespace') %>"
 
 echo "Setting up Eirini daemonsets"
-$kubectl apply -f /var/vcap/jobs/configure-eirini/config/eirini-daemonset.yaml
+$kubectl apply -f /var/vcap/jobs/configure-eirini/config/eirini-daemonset.yaml -n "<%= p('opi.system_namespace') %>"

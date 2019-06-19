@@ -26,8 +26,10 @@ properties:
     description: "CF's doppler address, used to stream application logs"
   eirini.doppler_address_with_az:
     description: "CF's doppler address for the current AZ, used to stream application logs"
-  eirini.namespace:
-    description: "Kubernetes namespace that Eirini has been configured to target"
+  opi.workloads_namespace:
+    description: "Kubernetes namespace where to run deployments and tasks"
+  opi.system_namespace:
+    description: "Kubernetes namespace where to deploy Eirini components"
   eirini.service_account:
     description: "The service account used by fluentd to access pod information"
   loggregator.ca-cert:

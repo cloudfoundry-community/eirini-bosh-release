@@ -13,23 +13,12 @@ kubectl=/var/vcap/packages/kubectl/bin/kubectl
 status "Making sure the Eirini namespace exists"
 $kubectl get namespace "<%= p("opi.kube_namespace") %>" || $kubectl create namespace "<%= p("opi.kube_namespace") %>"
 
-<% if_p("eirini.source_secrets_namespace", "eirini.source_secrets_name") do |source_secrets_namespace, source_secrets_name| %>
-
-status "Copying cc secrets to the Eirini namespace"
-secrets="$(${kubectl} get secret "<%= source_secrets_name %>" --namespace="<%= source_secrets_namespace %>" --export -o yaml | grep -E 'cc-.*|internal-ca-.*')"
-cat <<EOT >> secret.yml
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: <%= p("opi.certs_secret_name") %>
-type: Opaque
-data:
-${secrets}
-EOT
-
-$kubectl apply -f secret.yml --namespace "<%= p("opi.kube_namespace") %>"
-<% end %>
+$kubectl create secret generic "<%= p("opi.certs_secret_name") %>" -n "<%= p("opi.kube_namespace") %>" \
+  --from-literal=cc-server-crt='<%= p("opi.cc_cert") %>' \
+  --from-literal=cc-server-crt-key='<%= p("opi.cc_key") %>' \
+  --from-literal=cc-uploader-crt='<%= p("capi.cc_uploader.mutual_tls.server_cert") %>' \
+  --from-literal=cc-uploader-crt-key='<%= p("capi.cc_uploader.mutual_tls.server_key") %>' \
+  --from-literal=internal-ca-cert='<%= p("opi.cc_ca") %>'
 
 status "Setting up fluentd configuration"
 $kubectl apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml

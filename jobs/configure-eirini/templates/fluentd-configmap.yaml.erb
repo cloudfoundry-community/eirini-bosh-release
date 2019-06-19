@@ -23,14 +23,14 @@ data:
       @type kubernetes_metadata
     </filter>
     <match **>
-      type loggregator
+      @type loggregator
       loggregator_target localhost:3458
       loggregator_cert_file /fluentd/certs/agent.crt
       loggregator_key_file /fluentd/certs/agent.key
       loggregator_ca_file /fluentd/certs/ca.crt
       eirini_namespace <%= p("opi.kube_namespace") %>
     </match>
-    <match kubernetes.var.log.containers.**eirini**.log>
+    <match kubernetes.var.log.containers.**<%= p("opi.kube_namespace") %>**.log>
       @type stdout
     </match>
     <match kubernetes.var.log.containers.**.log>

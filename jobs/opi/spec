@@ -47,8 +47,12 @@ properties:
     description: "Internal URL for the Cloud Controller"
   opi.cc_uploader_ip:
     description: "IP Address of the Cloud Controller uploader"
-  opi.stager_image:
-    description: "Base docker image for staging"
+  opi.downloader_image:
+    description: "Downloads app-bits and buildpacks from the bits-service"
+  opi.uploader_image:
+    description: "Uploads the Droplet to the bits-service"
+  opi.executor_image:
+    description: "Executes the buildpackapplifecyle to build a Droplet"
   opi.metrics_source_address:
     description: "Source URL for metrics"
   opi.loggregator_address:

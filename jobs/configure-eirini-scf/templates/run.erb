@@ -21,7 +21,7 @@ $kubectl create secret generic "<%= p("opi.certs_secret_name") %>" -n "<%= p("op
   --from-literal=internal-ca-cert='<%= p("opi.cc_ca") %>'
 
 status "Setting up fluentd configuration"
-$kubectl apply -f /var/vcap/jobs/configure-eirini/config/fluentd-configmap.yaml
+$kubectl apply -f /var/vcap/jobs/configure-eirini-scf/config/fluentd-configmap.yaml
 
 status "Setting up Eirini daemonsets"
-$kubectl apply -f /var/vcap/jobs/configure-eirini/config/eirini-daemonset.yaml
+$kubectl apply -f /var/vcap/jobs/configure-eirini-scf/config/eirini-daemonset.yaml

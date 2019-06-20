@@ -1,5 +1,5 @@
 ---
-name: configure-eirini
+name: configure-eirini-scf
 
 description: Creates and configures components needed for Eirini (e.g. fluentd)
 

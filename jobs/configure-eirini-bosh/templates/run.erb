@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+echo "Configuring Eirini"
+
+export KUBECONFIG=/var/vcap/jobs/opi/config/kube.conf
+job_dir=/var/vcap/jobs/configure-eirini-bosh
+kubectl=/var/vcap/packages/kubectl/bin/kubectl
+
+$kubectl apply -f <($kubectl create namespace "<%= p('opi.system_namespace') %>" --dry-run --save-config -o yaml)
+
+$kubectl apply -f <($kubectl create secret generic loggregator-tls-certs-secret \
+  -n "<%= p('opi.system_namespace') %>" \
+  --dry-run \
+  --save-config \
+  --from-file=internal-ca-cert=${job_dir}/config/loggregator-ca.crt \
+  --from-file=loggregator-agent-cert=${job_dir}/config/loggregator-agent.crt \
+  --from-file=loggregator-agent-cert-key=${job_dir}/config/loggregator-agent.key \
+  -o yaml)
+
+echo "Setting up fluentd configuration"
+$kubectl apply -f ${job_dir}/config/fluentd-configmap.yaml -n "<%= p('opi.system_namespace') %>"
+
+echo "Setting up Eirini daemonsets"
+$kubectl apply -f ${job_dir}/config/eirini-daemonset.yaml -n "<%= p('opi.system_namespace') %>"

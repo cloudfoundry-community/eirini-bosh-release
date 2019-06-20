@@ -1,0 +1,40 @@
+---
+name: configure-eirini-bosh
+
+description: Creates and configures components needed for Eirini (e.g. fluentd)
+
+packages:
+  - kubectl
+
+templates:
+  run.erb: bin/run
+  eirini-daemonset.yaml.erb: config/eirini-daemonset.yaml
+  fluentd-configmap.yaml.erb: config/fluentd-configmap.yaml
+
+  loggregator-ca.crt.erb: config/loggregator-ca.crt
+  loggregator-agent.crt.erb: config/loggregator-agent.crt
+  loggregator-agent.key.erb: config/loggregator-agent.key
+
+properties:
+  eirini.loggregator_agent_image:
+    description: "The docker image used by Eirini to forward Kubernetes container logs"
+  eirini.fluentd_image:
+    description: "The docker image used by Eirini to consume Kubernetes container logs"
+  eirini.config_copier_image:
+    description: "The docker image used to copy the fluentd config to an accessible volume mount"
+  eirini.doppler_address:
+    description: "CF's doppler address, used to stream application logs"
+  eirini.doppler_address_with_az:
+    description: "CF's doppler address for the current AZ, used to stream application logs"
+  opi.workloads_namespace:
+    description: "Kubernetes namespace where to run deployments and tasks"
+  opi.system_namespace:
+    description: "Kubernetes namespace where to deploy Eirini components"
+  eirini.service_account:
+    description: "The service account used by fluentd to access pod information"
+  loggregator.ca-cert:
+    description: "CA certificate that is signing the server certificate of the target doppler and loggregator agent"
+  loggregator.agent-cert:
+    description: "Certificate of the loggregator agent"
+  loggregator.agent-cert-key:
+    description: "Private key of the loggregator agent"

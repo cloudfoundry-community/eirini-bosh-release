@@ -1,0 +1,114 @@
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: eirini-loggregator-fluentd
+spec:
+  selector:
+    matchLabels:
+      name: eirini-loggregator-fluentd
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: eirini-loggregator-fluentd
+    spec:
+      serviceAccountName: "<%= p('eirini.service_account') %>"
+      initContainers:
+      - name: config-copier
+        image: "<%= p('eirini.config_copier_image') %>"
+        command: [ "/bin/sh", "-c", "cp /input/fluent.conf /output" ]
+        volumeMounts:
+        - name: fluentd-conf
+          mountPath: /input
+        - name: config-volume
+          mountPath: /output
+          readOnly: false
+      containers:
+      - name: eirini-loggregator-fluentd
+        image: <%= p('eirini.fluentd_image') %>
+        imagePullPolicy: Always
+        env:
+        - name: FLUENT_UID
+          value: "0"
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: vardata
+          mountPath: /var/data
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+        - name: varvcapstoredockercontainers
+          mountPath: /var/vcap/store/docker/docker/containers
+          readOnly: true
+        - name: config-volume
+          mountPath: /fluentd/etc/
+          readOnly: false
+        - name: loggregator-tls-certs
+          mountPath: /fluentd/certs
+          readOnly: true
+      - name: loggregator-agent
+        image: <%= p('eirini.loggregator_agent_image') %>
+        imagePullPolicy: Always
+        env:
+        - name: AGENT_METRIC_SOURCE_ID
+          value: scf/daemonset/loggregator-fluentd
+        - name: ROUTER_ADDR
+          value: <%= p('eirini.doppler_address') %>
+        - name: ROUTER_ADDR_WITH_AZ
+          value: <%= p('eirini.doppler_address_with_az') %>
+        - name: AGENT_PPROF_PORT
+          value: "6062"
+        - name: AGENT_HEALTH_ENDPOINT_PORT
+          value: "6063"
+        ports:
+        - name: health
+          containerPort: 6063
+        volumeMounts:
+        - name: loggregator-tls-certs
+          mountPath: /srv/certs
+          readOnly: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: vardata
+        hostPath:
+          path: /var/data
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers
+      - name: varvcapstoredockercontainers
+        hostPath:
+          path: /var/vcap/store/docker/docker/containers
+      - name: loggregator-tls-certs
+        secret:
+          secretName: loggregator-tls-certs-secret
+          items:
+            - key: loggregator-agent-cert
+              path: agent.crt
+            - key: loggregator-agent-cert-key
+              path: agent.key
+            - key: internal-ca-cert
+              path: ca.crt
+      - name: config-volume
+        emptyDir: {}
+      - name: fluentd-conf
+        configMap:
+          name: fluentd-conf
+          items:
+          - key: fluentd-conf-contents
+            path: fluent.conf
+      - name: host-docker
+        hostPath:
+          path: /etc/docker
+          type: Directory

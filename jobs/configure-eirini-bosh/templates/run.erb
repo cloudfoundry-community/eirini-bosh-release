@@ -8,7 +8,7 @@ export KUBECONFIG=/var/vcap/jobs/opi/config/kube.conf
 job_dir=/var/vcap/jobs/configure-eirini-bosh
 kubectl=/var/vcap/packages/kubectl/bin/kubectl
 
-$kubectl apply -f <($kubectl create namespace "<%= p('opi.system_namespace') %>" --dry-run --save-config -o yaml)
+$kubectl apply -f <($kubectl create namespace "<%= p('opi.workloads_namespace') %>" --dry-run --save-config -o yaml)
 
 $kubectl apply -f <($kubectl create secret generic loggregator-tls-certs-secret \
   -n "<%= p('opi.system_namespace') %>" \

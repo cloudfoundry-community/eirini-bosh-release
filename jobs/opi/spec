@@ -48,10 +48,13 @@ properties:
   opi.cc_uploader_ip:
     description: "IP Address of the Cloud Controller uploader"
   opi.downloader_image:
+    default: ""
     description: "Downloads app-bits and buildpacks from the bits-service"
   opi.uploader_image:
+    default: ""
     description: "Uploads the Droplet to the bits-service"
   opi.executor_image:
+    default: ""
     description: "Executes the buildpackapplifecyle to build a Droplet"
   opi.metrics_source_address:
     description: "Source URL for metrics"

@@ -7,6 +7,6 @@
 [submodule "src/github.com/SUSE/eirini-persi-broker"]
 	path = src/github.com/SUSE/eirini-persi-broker
 	url = https://github.com/SUSE/eirini-persi-broker.git
-[submodule "src/github.com/SUSE/eirini-extensions"]
-	path = src/github.com/SUSE/eirini-extensions
-	url = https://github.com/SUSE/eirini-extensions.git
+[submodule "src/github.com/SUSE/eirini-persi"]
+	path = src/github.com/SUSE/eirini-persi
+	url = https://github.com/SUSE/eirini-persi.git

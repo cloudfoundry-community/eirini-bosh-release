@@ -6,8 +6,8 @@ export GOPATH=$BOSH_INSTALL_TARGET
 export GO111MODULE=off
 export GOROOT=$(readlink -nf /var/vcap/packages/golang)
 export PATH=$GOROOT/bin:$PATH
-pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-extensions
-  go build -o ${BOSH_INSTALL_TARGET}/bin/eirini-extensions cmd/eirini-ext/main.go
+pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-persi
+  go build -o ${BOSH_INSTALL_TARGET}/bin/eirini-persi cmd/eirini-ext/main.go
 popd
 
 # clean up source artifacts

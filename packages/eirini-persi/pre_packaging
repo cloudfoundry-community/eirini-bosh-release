@@ -1,0 +1,4 @@
+set -e
+
+cd ${BUILD_DIR}/github.com/SUSE/eirini-persi
+go mod vendor

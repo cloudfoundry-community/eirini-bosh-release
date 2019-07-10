@@ -1,5 +1,0 @@
-check process eirini-extensions
-  with pidfile /var/vcap/sys/run/bpm/eirini-extensions/eirini-extensions.pid
-  start program "/var/vcap/jobs/bpm/bin/bpm start eirini-extensions"
-  stop program "/var/vcap/jobs/bpm/bin/bpm stop eirini-extensions"
-  group vcap

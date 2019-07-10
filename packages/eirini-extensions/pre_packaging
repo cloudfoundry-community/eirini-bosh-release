@@ -1,4 +1,0 @@
-set -e
-
-cd ${BUILD_DIR}/github.com/SUSE/eirini-extensions
-go mod vendor

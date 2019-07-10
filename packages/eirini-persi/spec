@@ -1,0 +1,8 @@
+---
+name: eirini-persi
+
+dependencies:
+  - golang
+
+files:
+  - github.com/SUSE/eirini-persi/**/*

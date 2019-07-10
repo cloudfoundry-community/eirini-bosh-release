@@ -1,23 +1,23 @@
 ---
-name: eirini-extensions
+name: eirini-persi
 
 templates:
   bpm.yml.erb: config/bpm.yml
 
 packages:
-  - eirini-extensions
+  - eirini-persi
 
 properties:
-  eirini-extensions.namespace:
+  eirini-persi.namespace:
     default: "eirini"
     description: "Kubernetes namespace where to watch for Eirini applications."
-  eirini-extensions.operator_webhook_host:
+  eirini-persi.operator_webhook_host:
     default: ""
     description: "Hostname/IP under which the webhook server can be reached from the cluster (defaults to service)."
-  eirini-extensions.operator_webhook_port:
+  eirini-persi.operator_webhook_port:
     default: "2999"
     description: "Port the webhook server listens on."
-  eirini-extensions.kube_service_host:
+  eirini-persi.kube_service_host:
     description: "Kubernetes service host. Should be set to the value of KUBERNETES_SERVICE_HOST."
-  eirini-extensions.kube_service_port:
+  eirini-persi.kube_service_port:
     description: "Kubernetes service port. Should be set to the value of KUBERNETES_SERVICE_PORT."

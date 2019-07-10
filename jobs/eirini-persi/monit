@@ -1,0 +1,5 @@
+check process eirini-persi
+  with pidfile /var/vcap/sys/run/bpm/eirini-persi/eirini-persi.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start eirini-persi"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop eirini-persi"
+  group vcap

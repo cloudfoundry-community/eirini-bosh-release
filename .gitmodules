@@ -10,3 +10,6 @@
 [submodule "src/github.com/SUSE/eirini-persi"]
 	path = src/github.com/SUSE/eirini-persi
 	url = https://github.com/SUSE/eirini-persi.git
+[submodule "src/github.com/SUSE/eirini-loggregator-bridge"]
+	path = src/github.com/SUSE/eirini-loggregator-bridge
+	url = https://github.com/SUSE/eirini-loggregator-bridge.git

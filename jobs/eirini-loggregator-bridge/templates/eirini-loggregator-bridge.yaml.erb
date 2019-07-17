@@ -1,0 +1,12 @@
+<%=
+    config = {
+        "namespace" => p("eirini-loggregator-bridge.namespace"),
+        "loggregator-endpoint" => p("eirini-loggregator-bridge.loggregator_endpoint"),
+        "loggregator-ca-path" => "/var/vcap/jobs/eirini-loggregator-bridge/config/ca",
+        "loggregator-cert-path" => "/var/vcap/jobs/eirini-loggregator-bridge/config/cert",
+        "loggregator-key-path" => "/var/vcap/jobs/eirini-loggregator-bridge/config/key",
+    }
+
+    require 'yaml'
+    config.to_yaml
+%>

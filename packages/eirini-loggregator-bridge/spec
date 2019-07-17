@@ -1,0 +1,8 @@
+---
+name: eirini-loggregator-bridge
+
+dependencies:
+  - golang
+
+files:
+  - github.com/SUSE/eirini-loggregator-bridge/**/*

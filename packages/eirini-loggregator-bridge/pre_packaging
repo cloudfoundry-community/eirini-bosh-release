@@ -1,0 +1,4 @@
+set -e
+
+cd ${BUILD_DIR}/github.com/SUSE/eirini-loggregator-bridge
+go mod vendor

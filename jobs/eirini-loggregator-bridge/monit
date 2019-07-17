@@ -1,0 +1,5 @@
+check process eirini-loggregator-bridge
+  with pidfile /var/vcap/sys/run/bpm/eirini-loggregator-bridge/eirini-loggregator-bridge.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start eirini-loggregator-bridge"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop eirini-loggregator-bridge"
+  group vcap

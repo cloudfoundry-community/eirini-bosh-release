@@ -1,13 +1,14 @@
 ---
 name: configure-eirini-scf
 
-description: Creates and configures components needed for Eirini (e.g. fluentd)
+description: Creates and configures components needed for Eirini
 
 packages:
   - kubectl
 
 templates:
   run.erb: bin/run
+  eirini-cert-copier.yaml.erb: config/eirini-cert-copier.yaml
 
 properties:
   capi.cc_uploader.mutual_tls.server_cert:

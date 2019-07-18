@@ -1,4 +1,8 @@
 set -e
 
+export GOPATH=$BUILD_DIR
+export GOROOT=$BUILD_DIR
+export GOCACHE="${GOROOT}/cache"
+
 cd ${BUILD_DIR}/github.com/SUSE/eirini-persi-broker
 go mod vendor

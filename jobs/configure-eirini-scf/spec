@@ -8,8 +8,6 @@ packages:
 
 templates:
   run.erb: bin/run
-  eirini-daemonset.yaml.erb: config/eirini-daemonset.yaml
-  fluentd-configmap.yaml.erb: config/fluentd-configmap.yaml
 
 properties:
   capi.cc_uploader.mutual_tls.server_cert:
@@ -18,16 +16,6 @@ properties:
     description: "The PEM-encoded private key for internal cloud controller uploader traffic."
   eirini.cert_copier_image:
     description: "The docker image used by Eirini to register the image registry CA cert with Docker, on each Kubernetes node"
-  eirini.doppler_address:
-    description: "SCF's doppler address, used to stream application logs"
-  eirini.doppler_address_with_az:
-    description: "SCF's doppler address for the current AZ, used to stream application logs"
-  eirini.fluentd_image:
-    description: "The docker image used by Eirini to consume Kubernetes container logs"
-  eirini.fluentd.varlog_hostpath:
-    description: "The directory where the logs are stored on the node when on hostPath"
-  eirini.fluentd.varlog_hostpath_mount_point:
-    description: "The path inside the fluentd pot where the log_hostpath should be mounted"
   opi.cc_cert:
     description: "Cloud Controller cert"
   opi.cc_key:

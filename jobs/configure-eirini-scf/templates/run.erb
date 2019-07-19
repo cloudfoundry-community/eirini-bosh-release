@@ -20,8 +20,6 @@ $kubectl create secret generic "<%= p("opi.certs_secret_name") %>" -n "<%= p("op
   --from-literal=cc-uploader-crt-key='<%= p("capi.cc_uploader.mutual_tls.server_key") %>' \
   --from-literal=internal-ca-cert='<%= p("opi.cc_ca") %>'
 
-status "Setting up fluentd configuration"
-$kubectl apply -f /var/vcap/jobs/configure-eirini-scf/config/fluentd-configmap.yaml
 
-status "Setting up Eirini daemonsets"
-$kubectl apply -f /var/vcap/jobs/configure-eirini-scf/config/eirini-daemonset.yaml
+status "Copying Bits registry certificate on the host"
+$kubectl apply -f /var/vcap/jobs/configure-eirini-scf/config/eirini-cert-copier.yaml

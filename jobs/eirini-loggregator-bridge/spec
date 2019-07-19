@@ -1,0 +1,36 @@
+---
+name: eirini-loggregator-bridge
+
+templates:
+  ca.erb: config/ca
+  cert.erb: config/cert
+  key.erb: config/key
+  bpm.yml.erb: config/bpm.yml
+  eirini-loggregator-bridge.yaml.erb: config/eirini-loggregator-bridge.yaml
+
+packages:
+  - eirini-loggregator-bridge
+
+properties:
+  eirini-loggregator-bridge.kube_service_host:
+    description: "Kubernetes in cluster host"
+  eirini-loggregator-bridge.kube_service_port:
+    description: "Kubernetes in cluster Port"
+  eirini-loggregator-bridge.namespace:
+    default: "eirini"
+    description: "Kubernetes namespace where to watch for Eirini applications."
+  eirini-loggregator-bridge.loggregator_endpoint:
+    default: ""
+    description: "Loggregator endpoint"
+  eirini-loggregator-bridge.loggregator_ca:
+    default: ""
+    description: "The CA cert with which the loggregator cert is signed"
+  eirini-loggregator-bridge.loggregator_cert:
+    default: ""
+    description: "The Cert to talk to loggregator over TLS"
+  eirini-loggregator-bridge.loggregator_key:
+    default: ""
+    description: "The private key of the certificate"
+  eirini-loggregator-bridge.kubeconfig:
+    default: ""
+    description: "The path to the kubeconfig (if running from outside the cluster)"

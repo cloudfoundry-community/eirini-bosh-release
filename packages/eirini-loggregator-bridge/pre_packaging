@@ -4,8 +4,7 @@ export GOPATH=$BUILD_DIR
 export GOROOT=$BUILD_DIR
 export GOCACHE="${GOROOT}/cache"
 
-cd ${BUILD_DIR}/github.com/SUSE/eirini-persi-broker
+cd ${BUILD_DIR}/github.com/SUSE/eirini-loggregator-bridge
 go mod vendor
-
 rm -rf $BUILD_DIR/cache
 rm -rf $BUILD_DIR/pkg

@@ -1,31 +1,41 @@
 ---
-apiVersion: batch/v1
-kind: Job
+apiVersion: extensions/v1beta1
+kind: DaemonSet
 metadata:
-  name: cert-copier
+  name: eirini-copy-certs
 spec:
+  selector:
+    matchLabels:
+      name: eirini-copy-certs
   template:
+    metadata:
+      labels:
+        name: eirini-copy-certs
     spec:
       serviceAccountName: "eirini"
-      restartPolicy: Never
       containers:
-      - name: copy-certs
-        env:
-        - name: INTERNAL_CA_CERT
-          valueFrom:
-            secretKeyRef:
-              key: internal-ca-cert
-              name: "<%= p('opi.certs_secret_name') %>"
-        - name: REGISTRY
-          value: "<%= p('opi.registry_address') %>"
-        - name: SCF_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        image: "<%= p('eirini.cert_copier_image') %>"
-        volumeMounts:
-        - name: host-docker
-          mountPath: /workspace/docker
+        - name: copy-certs
+          command: ["/bin/bash"]
+          args:
+          - -c
+          - /copy.sh && while true; do sleep 3600; done
+          env:
+          - name: INTERNAL_CA_CERT
+            valueFrom:
+              secretKeyRef:
+                key: internal-ca-cert
+                name: "<%= p('opi.certs_secret_name') %>"
+          - name: REGISTRY
+            value: "<%= p('opi.registry_address') %>"
+          - name: SCF_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          image: "<%= p('eirini.cert_copier_image') %>"
+          volumeMounts:
+          - name: host-docker
+            mountPath: /workspace/docker
+      terminationGracePeriodSeconds: 30
       volumes:
       - name: host-docker
         hostPath:

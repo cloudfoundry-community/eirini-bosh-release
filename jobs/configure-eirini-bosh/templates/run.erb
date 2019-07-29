@@ -4,8 +4,8 @@ set -euxo pipefail
 
 echo "Configuring Eirini"
 
-export KUBECONFIG=/var/vcap/jobs/opi/config/kube.conf
 job_dir=/var/vcap/jobs/configure-eirini-bosh
+export KUBECONFIG=${job_dir}/config/kube.conf
 kubectl=/var/vcap/packages/kubectl/bin/kubectl
 
 $kubectl apply -f <($kubectl create namespace "<%= p('opi.workloads_namespace') %>" --dry-run --save-config -o yaml)

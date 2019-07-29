@@ -14,7 +14,7 @@ spec:
       labels:
         name: eirini-loggregator-fluentd
     spec:
-      serviceAccountName: "<%= p('eirini.service_account') %>"
+      serviceAccountName: "<%= p('eirini.k8s.service_account.name') %>"
       initContainers:
       - name: config-copier
         image: "<%= p('eirini.config_copier_image') %>"

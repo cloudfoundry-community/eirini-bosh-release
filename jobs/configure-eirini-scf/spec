@@ -17,6 +17,10 @@ properties:
     description: "The PEM-encoded private key for internal cloud controller uploader traffic."
   eirini.cert_copier_image:
     description: "The docker image used by Eirini to register the image registry CA cert with Docker, on each Kubernetes node"
+  eirini.run_cert_copier:
+    description: "Controls if the cert copier daemonset should be created."
+    default: true
+
   opi.cc_cert:
     description: "Cloud Controller cert"
   opi.cc_key:

@@ -21,5 +21,9 @@ $kubectl create secret generic "<%= p("opi.certs_secret_name") %>" -n "<%= p("op
   --from-literal=internal-ca-cert='<%= p("opi.cc_ca") %>'
 
 
+<% if_p("eirini.cert_copier_image") do %>
+
 status "Copying Bits registry certificate on the host"
 $kubectl apply -f /var/vcap/jobs/configure-eirini-scf/config/eirini-cert-copier.yaml
+
+<% end %>

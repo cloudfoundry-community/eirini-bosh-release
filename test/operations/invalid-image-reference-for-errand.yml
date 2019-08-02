@@ -1,0 +1,9 @@
+- type: replace
+  path: /instance_groups/name=eirini/jobs/name=configure-eirini-bosh/properties/eirini/fluentd_image
+  value: example.com/this-should-not-exist
+- type: replace
+  path: /instance_groups/name=eirini/jobs/name=configure-eirini-bosh/properties/eirini/loggregator_agent_image
+  value: example.com/this-should-not-exist
+- type: replace
+  path: /instance_groups/name=eirini/jobs/name=configure-eirini-bosh/properties/errand?/daemonset_rollout_timeout
+  value: "1m"

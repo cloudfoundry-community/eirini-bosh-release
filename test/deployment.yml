@@ -1,0 +1,71 @@
+name: ((deployment_name))
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-1200000
+  max_in_flight: 1
+  serial: false
+  update_watch_time: 5000-1200000
+
+addons:
+- name: bpm
+  include:
+    stemcell:
+    - os: ubuntu-xenial
+
+instance_groups:
+- azs:
+  - z1
+  instances: 1
+  jobs:
+  - name: configure-eirini-bosh
+    properties:
+      eirini:
+        config_copier_image: alpine:latest
+        doppler_address: 10.0.255.1:8082
+        doppler_address_with_az: 10.0.255.1:8082
+        fluentd_image: eirini/loggregator-fluentd@sha256:b518ac42fad069195fe397e875f2d55c2972da6857cba3717f32b2939a7eaf25
+        loggregator_agent_image: loggregator/agent
+        service_account: ((k8s_service_username))
+        k8s:
+          host_url: ((k8s_host_url))
+          node_ca: ((k8s_node_ca))
+          service_account:
+            name: ((k8s_service_username))
+            token: ((k8s_service_token))
+      loggregator:
+        agent-cert: ((loggregator_tls_agent.certificate))
+        agent-cert-key: ((loggregator_tls_agent.private_key))
+        ca-cert: ((loggregator_tls_agent.ca))
+      opi:
+        system_namespace: ((k8s_system_namespace))
+        workloads_namespace: cf-workloads
+    release: eirini
+  name: eirini
+  networks:
+  - name: default
+  persistent_disk_type: 5GB
+  release: eirini
+  stemcell: default
+  vm_type: minimal
+
+releases:
+- name: eirini
+  version: latest
+
+variables:
+- name: loggregator_tls_ca
+  type: certificate
+  options:
+    common_name: loggregator_tls_ca
+    is_ca: true
+- name: loggregator_tls_agent
+  type: certificate
+  options:
+    common_name: loggregator_tls_agent
+    ca: loggregator_tls_ca
+
+stemcells:
+- alias: default
+  os: ubuntu-xenial
+  version: latest

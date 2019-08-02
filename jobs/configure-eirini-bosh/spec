@@ -50,3 +50,7 @@ properties:
     description: "Certificate of the loggregator agent"
   loggregator.agent-cert-key:
     description: "Private key of the loggregator agent"
+
+  errand.daemonset_rollout_timeout:
+    description: "String (e.g., '3s', '4m', '2h') indicating the time to allow the Eirini daemonset rollout to become healthy. The errand will exit with an error if the rollout takes longer than this time."
+    default: 20m

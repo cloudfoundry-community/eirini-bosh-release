@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
 echo "Configuring Eirini"
 
@@ -24,3 +24,6 @@ $kubectl apply -f ${job_dir}/config/fluentd-configmap.yaml -n "<%= p('opi.system
 
 echo "Setting up Eirini daemonsets"
 $kubectl apply -f ${job_dir}/config/eirini-daemonset.yaml -n "<%= p('opi.system_namespace') %>"
+
+echo "Verifying DaemonSet deployed successfully"
+$kubectl rollout status --timeout=<%= p('errand.daemonset_rollout_timeout') %> -f ${job_dir}/config/eirini-daemonset.yaml -n "<%= p('opi.system_namespace') %>"

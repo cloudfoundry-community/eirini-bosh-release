@@ -8,6 +8,9 @@ packages:
 
 templates:
   run.erb: bin/run
+
+  kube.conf.erb: config/kube.conf
+  node_ca.crt.erb: config/node_ca.crt
   eirini-daemonset.yaml.erb: config/eirini-daemonset.yaml
   fluentd-configmap.yaml.erb: config/fluentd-configmap.yaml
 
@@ -26,15 +29,28 @@ properties:
     description: "CF's doppler address, used to stream application logs"
   eirini.doppler_address_with_az:
     description: "CF's doppler address for the current AZ, used to stream application logs"
+
+  eirini.k8s.host_url:
+    description: "URL of k8s node"
+  eirini.k8s.node_ca:
+    description: "CA certificate for k8s node"
+  eirini.k8s.service_account.name:
+    description: "The service account used by fluentd to access pod information"
+  eirini.k8s.service_account.token:
+    description: "Token for the service account fluentd uses to access pod information"
+
   opi.workloads_namespace:
     description: "Kubernetes namespace where to run deployments and tasks"
   opi.system_namespace:
     description: "Kubernetes namespace where to deploy Eirini components"
-  eirini.service_account:
-    description: "The service account used by fluentd to access pod information"
+
   loggregator.ca-cert:
     description: "CA certificate that is signing the server certificate of the target doppler and loggregator agent"
   loggregator.agent-cert:
     description: "Certificate of the loggregator agent"
   loggregator.agent-cert-key:
     description: "Private key of the loggregator agent"
+
+  errand.daemonset_rollout_timeout:
+    description: "String (e.g., '3s', '4m', '2h') indicating the time to allow the Eirini daemonset rollout to become healthy. The errand will exit with an error if the rollout takes longer than this time."
+    default: 20m

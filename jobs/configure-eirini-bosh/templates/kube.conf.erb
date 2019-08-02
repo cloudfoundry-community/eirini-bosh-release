@@ -1,0 +1,20 @@
+<% if_p("eirini.k8s.host_url", "eirini.k8s.node_ca", "eirini.k8s.service_account.name", "eirini.k8s.service_account.token") do |host_url, node_ca, service_username, service_token| %>
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: /var/vcap/jobs/configure-eirini-bosh/config/node_ca.crt
+    server: <%= host_url %>
+  name: eirini-cluster
+contexts:
+- context:
+    cluster: eirini-cluster
+    user: <%= service_username %>
+  name: eirini-cluster
+current-context: eirini-cluster
+kind: Config
+preferences: {}
+users:
+- name: <%= service_username %>
+  user:
+    token: <%= service_token %>
+<% end %>

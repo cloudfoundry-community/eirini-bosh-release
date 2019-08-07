@@ -9,6 +9,7 @@ export PATH=$GOROOT/bin:$PATH
 export GOCACHE="${GOROOT}/cache"
 
 pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-persi
+  go mod vendor -v
   go build -o ${BOSH_INSTALL_TARGET}/bin/eirini-persi cmd/eirini-ext/main.go
 popd
 

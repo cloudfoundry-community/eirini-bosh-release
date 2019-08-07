@@ -7,7 +7,9 @@ export GO111MODULE=off
 export GOROOT=$(readlink -nf /var/vcap/packages/golang)
 export PATH=$GOROOT/bin:$PATH
 export GOCACHE="${GOROOT}/cache"
+
 pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-loggregator-bridge
+  go mod vendor -v
   go build -o ${BOSH_INSTALL_TARGET}/bin/eirini-loggregator-bridge
 popd
 

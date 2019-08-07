@@ -8,6 +8,10 @@ export GOROOT=$(readlink -nf /var/vcap/packages/golang)
 export PATH=$GOROOT/bin:$PATH
 export GOCACHE="${GOROOT}/cache"
 
+pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-persi-broker
+  go mod vendor -v
+popd
+
 pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-persi-broker/cmd/broker
   go build -o ${BOSH_INSTALL_TARGET}/bin/eirini-persi-broker
 popd

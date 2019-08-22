@@ -1,7 +1,7 @@
-eirini/eirinifs-v75.0.0.tar:
-  size: 1071074304
-  object_id: 01f0a836-a872-43c0-4bdd-7a21a7e09000
-  sha: sha256:e972593fc1c01c7017a77895f44ff627e619606944bb84cfc17204381d53270c
+eirini/eirinifs-v76-dev-89e0cb3.tar:
+  size: 1095087104
+  object_id: cf897ef9-54b5-4806-4781-4fa7a2ced409
+  sha: sha256:556e17791213aa779c07893bbaae7ec5681e676621967036ef5c9aaa38004fed
 golang/go1.12.4.linux-amd64.tar.gz:
   size: 127928770
   object_id: 9245fce7-c63f-4712-6e42-7c6ca236b8b5

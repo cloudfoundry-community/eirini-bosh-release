@@ -1,0 +1,15 @@
+<%=
+		config = {
+			"enable_cf_auth" => true,
+			"cc_api_url" => p("eirini-ssh-proxy.api_url"),
+			"skip_cert_verify" => true,
+			"uaa_username" => "ssh-proxy",
+			"uaa_password" => p("uaa.clients.ssh-proxy.secret"),
+			"uaa_token_url" => File.join(p("uaa.url"),"oauth/token"),
+			"address" => "0.0.0.0:"+p("eirini-ssh-proxy.port"),
+			"log_level" => "info"
+		}
+
+    require 'json'
+    config.to_json
+%>

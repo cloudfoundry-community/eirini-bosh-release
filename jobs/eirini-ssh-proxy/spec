@@ -1,0 +1,22 @@
+---
+name: eirini-ssh-proxy
+
+templates:
+  bpm.yml.erb: config/bpm.yml
+  eirini-ssh-proxy.json.erb: config/eirini-ssh-proxy.json
+
+packages:
+  - eirini-ssh-proxy
+
+properties:
+  eirini-ssh-proxy.api_url:
+    description: "The CloudFoundry API service url"
+  eirini-ssh-proxy.port:
+		default: 2222
+    description: "The port to which the ssh-proxy should listen for connections"
+  uaa.clients.ssh-proxy.secret:
+    default: ""
+    description: "The password of the ssh-proxy account in UAA"
+  uaa.url:
+    default: ""
+    description: "The url to access UAA"

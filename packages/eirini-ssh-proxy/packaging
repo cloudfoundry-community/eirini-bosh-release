@@ -7,8 +7,8 @@ export GO111MODULE=off
 export GOROOT=$(readlink -nf /var/vcap/packages/golang)
 export PATH=$GOROOT/bin:$PATH
 export GOCACHE="${GOROOT}/cache"
-pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-ssh
-  go build cmd/ssh-proxy -o ${BOSH_INSTALL_TARGET}/bin/eirini-ssh-proxy
+pushd ${BOSH_INSTALL_TARGET}/src/github.com/SUSE/eirini-ssh/cmd/ssh-proxy
+  go build -o ${BOSH_INSTALL_TARGET}/bin/eirini-ssh-proxy
 popd
 
 # clean up source artifacts

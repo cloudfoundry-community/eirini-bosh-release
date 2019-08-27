@@ -4,6 +4,9 @@ processes:
     args:
       - "--config"
       - "/var/vcap/jobs/eirini-ssh-proxy/config/eirini-ssh-proxy.json"
+    env:
+      KUBERNETES_SERVICE_HOST: "<%= p("eirini-ssh-proxy.kube_service_host") %>"
+      KUBERNETES_SERVICE_PORT: "<%= p("eirini-ssh-proxy.kube_service_port") %>"
     <% if properties.opi&.k8s&.host_url.nil? %>
     # The ServiceAccount admission controller has to be enabled.
     # https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod

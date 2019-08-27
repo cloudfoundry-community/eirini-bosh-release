@@ -3,24 +3,61 @@
 This is a BOSH release for [eirini](https://code.cloudfoundry.org/eirini).
 
 ## Deploying CF+Eirini with BOSH
-
 1. Ensure you have the following utilities:
-  - `jq`
-  - `bosh`
-  - `credhub`
-  - `kubectl`
-1. Create a k8s cluster and add it as the current context to your kubectl config.
-1. Ensure that the BOSH & CredHub CLI connection environment variables are properly set.
-1. Run `scripts/pre-deploy-configure-k8s.sh`
-1. Create and upload the following BOSH releases:
-    - [`bits-service-release`](https://github.com/cloudfoundry-incubator/bits-service-release)
-        - At least git tag > `2.26.0-dev.8`
-    - This BOSH release
-1. Deploy `cf-deployment` with the following ops files (in this order):
-    - `<CF_DEPLOYMENT>/operations/bits-service/use-bits-service.yml`
-    - `eirini-bosh-release/operations/add-eirini.yml`
-1. Run `scripts/post-deploy-configure-k8s.sh <LB_CA_CERT_VALUE> <SYSTEM_DOMAIN>`
-    - The value of `LB_CA_CERT_VALUE` must be the CA of the cert of whatever in your deployment is terminating TLS (usually either an IaaS load balancer or the gorouter itself)
+  - [`bosh`](https://bosh.io/docs/cli-v2-install/)
+  - [`bosh-bootloader`](https://github.com/cloudfoundry/bosh-bootloader#prerequisites)
+  - [`credhub`](https://github.com/cloudfoundry-incubator/credhub-cli#installing-the-cli)
+1. Clone relevant repos to deploy CF.
+    ```
+    git clone https://github.com/cloudfoundry/cf-deployment.git
+    /path/to/cf-deployment
+    git clone https://github.com/cloudfoundry-community/eirini-bosh-release.git
+    /path/to/eirini-bosh-release
+    ```
+1. Create a GCP service account for use by BBL (BOSH Bootloader): [Getting
+   Started: GCP # Create a Service
+   Account](https://github.com/cloudfoundry/bosh-bootloader/blob/master/docs/getting-started-gcp.md#create-a-service-account)
+
+1. Generate a certificate for use by CF load balancers. See [Deploying CF#step-1-get-you-some-load-balancers](https://github.com/cloudfoundry/cf-deployment/blob/master/texts/deployment-guide.md#step-1-get-you-some-load-balancers) for help.
+1. Create and bootstrap the directory to store your BBL (BOSH Bootloader) state:
+    ```
+    mkdir -p ~/path/to/envs/new_environment
+    cd ~/path/to/envs/new_environment
+
+    # export BBL_ENV_NAME=new_environment
+    # export BBL_IAAS=gcp
+    # export BBL_GCP_REGION=us-west1
+    # export BBL_GCP_SERVICE_ACCOUNT_KEY=/path/to/key.json
+
+    bbl plan --lb-type cf --lb-domain system.tld --lb-cert /path/to/cert --lb-key /path/to/key
+    ```
+
+1. Apply the relevant plan patches to the BBL state dir.
+    ```
+    cp -R ~/path/to/eirini-bosh-release/plan-patches/shared/. ~/path/to/envs/new_environment
+    cp -R ~/path/to/eirini-bosh-release/plan-patches/gcp/. ~/path/to/envs/new_environment
+    ```
+1. Deploy the infrastructure with BBL.
+    ```
+    bbl up
+    ```
+1. Upload stemcell to BOSH director
+    ```
+    eval "$(bbl print-env)"
+    ./upload-stemcell.sh /path/to/cf-deployment
+    ```
+1. Deploy CF
+    ```
+    eval "$(bbl print-env)"
+    ./deploy.sh /path/to/cf-deployment /path/to/eirini-bosh-release
+    ```
+1. Create a new DNS record by following the instructions [Step 2: Update your DNS records to point to your load balancer
+](https://github.com/cloudfoundry/cf-deployment/blob/master/texts/deployment-guide.md#step-2-update-your-dns-records-to-point-to-your-load-balancer).
+
+1. Run the post-deploy errand:
+    ```
+    bosh -d cf run-errand configure-eirini-bosh
+    ```
 
 ## Contributing
 

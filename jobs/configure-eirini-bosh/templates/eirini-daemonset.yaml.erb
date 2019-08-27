@@ -15,6 +15,7 @@ spec:
         name: eirini-loggregator-fluentd
     spec:
       serviceAccountName: "<%= p('eirini.k8s.service_account.name') %>"
+      automountServiceAccountToken: true
       initContainers:
       - name: config-copier
         image: "<%= p('eirini.config_copier_image') %>"

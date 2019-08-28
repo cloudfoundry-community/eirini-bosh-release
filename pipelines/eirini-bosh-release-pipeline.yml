@@ -1,0 +1,98 @@
+resources:
+- name: eirini-bosh-release
+  type: git
+  source:
+    uri: "https://github.com/cloudfoundry-community/eirini-bosh-release"
+    branch: ((eirini_bosh_release_branch))
+- name: cf-deployment
+  type: git
+  source:
+    uri: "https://github.com/cloudfoundry/cf-deployment"
+    branch: release-candidate
+- name: bits-service-bosh-release
+  type: bosh-io-release
+  source:
+    repository: cloudfoundry-incubator/bits-service-release
+- name: cf-deployment-concourse-tasks
+  type: git
+  source:
+    uri: "https://github.com/cloudfoundry/cf-deployment-concourse-tasks"
+- name: env-bbl-state
+  type: git
+  source:
+    uri: ((bbl_state_repo_uri))
+    paths:
+      - ((bbl_state_path))
+    private_key: {{bbl_state_repo_private_key}}
+    branch: master
+
+jobs:
+- name: create-upload-and-deploy-eirini-bosh-release
+  serial_groups: [ eirini-validation ]
+  plan:
+  - in_parallel:
+    - get: eirini-bosh-release
+      trigger: true
+    - get: cf-deployment
+      trigger: true
+    - get: bits-service-bosh-release
+    - get: cf-deployment-concourse-tasks
+    - get: env-bbl-state
+
+  - task: upload-stemcell
+    file: cf-deployment-concourse-tasks/bosh-upload-stemcells/task.yml
+    input_mapping:
+      bbl-state: env-bbl-state
+    params:
+      BBL_STATE_DIR: ((bbl_state_path))
+  - task: collect-ops-files
+    file: cf-deployment-concourse-tasks/collect-ops-files/task.yml
+    input_mapping:
+      base-ops-files: cf-deployment
+      new-ops-files: eirini-bosh-release
+    params:
+      BASE_OPS_FILE_DIR: operations
+      NEW_OPS_FILES: |
+        operations/add-eirini.yml
+        operations/hardcode-doppler-ip.yml
+  - task: deploy-eirini
+    file: cf-deployment-concourse-tasks/bosh-deploy-with-created-release/task.yml
+    input_mapping:
+      bbl-state: env-bbl-state
+      release: eirini-bosh-release
+      ops-files: collected-ops-files
+      vars-files: env-bbl-state
+    params:
+      BBL_STATE_DIR: ((bbl_state_path))
+      SYSTEM_DOMAIN: ((system_domain))
+      OPS_FILES: |
+        operations/use-compiled-releases.yml
+        operations/bits-service/use-bits-service.yml
+        operations/add-eirini.yml
+        operations/hardcode-doppler-ip.yml
+        operations/scale-to-one-az.yml
+  - task: configure-eirini
+    file: cf-deployment-concourse-tasks/run-errand/task.yml
+    input_mapping:
+      bbl-state: env-bbl-state
+    params:
+      BBL_STATE_DIR: ((bbl_state_path))
+      ERRAND_NAME: configure-eirini-bosh
+
+- name: run-smoke-tests
+  serial_groups: [ eirini-validation ]
+  plan:
+  - in_parallel:
+    - get: eirini-bosh-release
+      trigger: true
+      passed: [ create-upload-and-deploy-eirini-bosh-release ]
+    - get: cf-deployment-concourse-tasks
+    - get: env-bbl-state
+      passed: [ create-upload-and-deploy-eirini-bosh-release ]
+  - task: smoke-tests
+    file: cf-deployment-concourse-tasks/run-errand/task.yml
+    input_mapping:
+      bbl-state: env-bbl-state
+    params:
+      BBL_STATE_DIR: ((bbl_state_path))
+      ERRAND_NAME: smoke-tests

@@ -1,5 +1,5 @@
-output "k8s_service_token" {
-  value = "${data.kubernetes_secret.k8s_service_token.data.token}"
+output "k8s_service_account_data" {
+  value = "${data.kubernetes_secret.k8s_service_token.data}"
 }
 
 output "k8s_host_url" {

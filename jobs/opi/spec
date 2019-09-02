@@ -2,6 +2,8 @@
 name: opi
 
 templates:
+  pre-start.erb: bin/pre-start
+
   bpm.yml.erb: config/bpm.yml
   opi.yml.erb: config/opi.yml
   kube.conf.erb: config/kube.conf
@@ -31,6 +33,10 @@ properties:
     description: "Kubernetes service port. Should be set to the value of KUBERNETES_SERVICE_PORT."
   opi.registry_address:
     description: "Address of registry"
+  opi.registry_username:
+    description: "Basic auth username for registry"
+  opi.registry_password:
+    description: "Basic auth user credentials for registry"
   opi.eirini_address:
     description: "Address of Eirini"
   opi.nats_password:

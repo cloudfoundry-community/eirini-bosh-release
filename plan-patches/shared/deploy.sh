@@ -12,8 +12,7 @@ CF_DEPLOYMENT_PATH="$(realpath -e ${1})"
 EIRINI_BOSH_RELEASE_PATH="$(realpath -e ${2})"
 
 bosh upload-release https://bosh.io/d/github.com/cloudfoundry-community/eirini-bosh-release
-# pin to version 2.28.0 of bits-service until we've added support for auth with bits-service registry
-bosh upload-release https://bosh.io/d/github.com/cloudfoundry-incubator/bits-service-release?v=2.28.0
+bosh upload-release https://bosh.io/d/github.com/cloudfoundry-incubator/bits-service-release
 
 bosh -d cf deploy "${CF_DEPLOYMENT_PATH}/cf-deployment.yml" --no-redact \
   -o "${CF_DEPLOYMENT_PATH}/operations/use-compiled-releases.yml" \

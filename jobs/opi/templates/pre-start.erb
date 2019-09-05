@@ -6,6 +6,8 @@ job_dir=/var/vcap/jobs/opi
 export KUBECONFIG=${job_dir}/config/kube.conf
 kubectl=/var/vcap/packages/kubectl/bin/kubectl
 
+$kubectl apply -f <($kubectl create namespace "<%= p('opi.kube_namespace') %>" --dry-run --save-config -o yaml)
+
 $kubectl apply -f <($kubectl create secret docker-registry bits-service-registry-secret \
   -n "<%= p('opi.kube_namespace') %>" \
   --dry-run \

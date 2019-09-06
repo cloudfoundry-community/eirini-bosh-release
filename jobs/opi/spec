@@ -22,6 +22,7 @@ templates:
 packages:
   - pid_utils
   - eirini
+  - kubectl
 
 properties:
   opi.kube_namespace:

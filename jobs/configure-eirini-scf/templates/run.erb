@@ -10,9 +10,6 @@ status "Configuring Eirini"
 
 kubectl=/var/vcap/packages/kubectl/bin/kubectl
 
-status "Making sure the Eirini namespace exists"
-$kubectl get namespace "<%= p("opi.kube_namespace") %>" || $kubectl create namespace "<%= p("opi.kube_namespace") %>"
-
 $kubectl create secret generic "<%= p("opi.certs_secret_name") %>" -n "<%= p("opi.kube_namespace") %>" \
   --from-literal=cc-server-crt='<%= p("opi.cc_cert") %>' \
   --from-literal=cc-server-crt-key='<%= p("opi.cc_key") %>' \

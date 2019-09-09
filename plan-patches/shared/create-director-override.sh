@@ -1,7 +1,6 @@
 #!/bin/sh
 
-SCRIPT_DIR=$(dirname "$(readlink \"$0\")")
-"${SCRIPT_DIR}/create-director.sh"
+"${BBL_STATE_DIR}/create-director.sh"
 
 bosh_director_name="$(bbl outputs | bosh int - --path=/director_name)"
 k8s_host_url="$(bbl outputs | bosh int - --path=/k8s_host_url)"

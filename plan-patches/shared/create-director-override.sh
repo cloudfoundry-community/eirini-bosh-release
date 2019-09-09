@@ -1,5 +1,6 @@
 #!/bin/sh
 
+export BBL_STATE_DIRECTORY="$BBL_STATE_DIR"
 "${BBL_STATE_DIR}/create-director.sh"
 
 bosh_director_name="$(bbl outputs | bosh int - --path=/director_name)"

@@ -15,6 +15,10 @@ properties:
     description: "The PEM-encoded certificate for internal cloud controller uploader traffic."
   capi.cc_uploader.mutual_tls.server_key:
     description: "The PEM-encoded private key for internal cloud controller uploader traffic."
+  cc.opi.client_cert:
+    description: "TLS certificate for Eirini server"
+  cc.opi.client_key:
+    description: "Private key associated with TLS certificate for Eirini server"
   eirini.cert_copier_image:
     description: "The docker image used by Eirini to register the image registry CA cert with Docker, on each Kubernetes node"
   eirini.run_cert_copier:

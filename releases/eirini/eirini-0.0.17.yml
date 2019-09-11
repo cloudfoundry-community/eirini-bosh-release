@@ -1,0 +1,98 @@
+name: eirini
+version: 0.0.17
+commit_hash: 314b7e6
+uncommitted_changes: false
+jobs:
+- name: configure-eirini-bosh
+  version: 244cc7d84ab0e6d241b43145f8081a1dabd25fb5967cf023580c2132260376f7
+  fingerprint: 244cc7d84ab0e6d241b43145f8081a1dabd25fb5967cf023580c2132260376f7
+  sha1: sha256:e340cd9f254bd2cd54c82348ed47c384b260f94ada6eabbfe681086f6d4935f6
+  packages:
+  - kubectl
+- name: configure-eirini-scf
+  version: 6de2465352cff174a25c334199d577fdacdbb8a2762d715f48bfb28420aab44c
+  fingerprint: 6de2465352cff174a25c334199d577fdacdbb8a2762d715f48bfb28420aab44c
+  sha1: sha256:082b7d9ce5ee7463b66cb92304549cca3c8110bd205fd762ce972815389896f4
+  packages:
+  - kubectl
+- name: eirini-loggregator-bridge
+  version: b3a0056f41e35bdaa503a4229180a89c7a26ec0cb63304dba4f376a020ea3e23
+  fingerprint: b3a0056f41e35bdaa503a4229180a89c7a26ec0cb63304dba4f376a020ea3e23
+  sha1: sha256:2ab2e5a8c16e6a8f62b82ee382468a1f6a4097d6dc916d2ec29f7ace99f8d1eb
+  packages:
+  - eirini-loggregator-bridge
+- name: eirini-persi
+  version: d25a2608675ed85176b04c188a734aafd4bb93dee0bfd0c42c71c5ef71201739
+  fingerprint: d25a2608675ed85176b04c188a734aafd4bb93dee0bfd0c42c71c5ef71201739
+  sha1: sha256:52114018b199ff4853a4a44d1a3410e22319d6f7b2b882bbbc4500625aa8d76a
+  packages:
+  - eirini-persi
+- name: eirini-persi-broker
+  version: 13c3e43c6a33d71b76605363693b20e67d8c5bc431c9917314ffe90f234ebbca
+  fingerprint: 13c3e43c6a33d71b76605363693b20e67d8c5bc431c9917314ffe90f234ebbca
+  sha1: sha256:7234b12fd1f6dc63762deebef7f3fc9fcd271d88b451a4851e79011dbde65b2c
+  packages:
+  - eirini-persi-broker
+- name: eirinifs
+  version: bba06af5093d66f8be99d0bc38499a524b12970c0f455f6b71bf8dbd6cd38883
+  fingerprint: bba06af5093d66f8be99d0bc38499a524b12970c0f455f6b71bf8dbd6cd38883
+  sha1: sha256:b6579d115b4369c952bb36c65da198af36d5605d4b284ec7be46e2cec857f832
+  packages:
+  - eirinifs
+- name: opi
+  version: e41c6748e0466baace6b001881aca30aff70a4cd38f3683c36a76af3f895704d
+  fingerprint: e41c6748e0466baace6b001881aca30aff70a4cd38f3683c36a76af3f895704d
+  sha1: sha256:fdf6aa7017643171181c35b7a6170e501b45d97349763780efe3effaf677a59d
+  packages:
+  - pid_utils
+  - eirini
+  - kubectl
+packages:
+- name: eirini
+  version: d1ef1dba90debfd8abaa29886881ac5de174df3f73b20fe9dbfebb1e722c7906
+  fingerprint: d1ef1dba90debfd8abaa29886881ac5de174df3f73b20fe9dbfebb1e722c7906
+  sha1: sha256:adb19568318f9c037675acf420e226123dfa37960fd7bebbcbbff26f3781885c
+  dependencies:
+  - golang
+- name: eirini-loggregator-bridge
+  version: 9daae3eb1fab45f648552d77d2036463cbe6f4cb71d62662999ca44414536e00
+  fingerprint: 9daae3eb1fab45f648552d77d2036463cbe6f4cb71d62662999ca44414536e00
+  sha1: sha256:051104994ba4b413335c8ad30f8c80f4d96d7f671d74e2280f36f7343e9f6cf4
+  dependencies:
+  - golang
+- name: eirini-persi
+  version: 68dbd06ef15b973a20bb352085b87c7f7e7d94e384517ce8a29a929f0c72522a
+  fingerprint: 68dbd06ef15b973a20bb352085b87c7f7e7d94e384517ce8a29a929f0c72522a
+  sha1: sha256:4d501ad939285878cf1916e3d4812d4e5296aeff2df3bc61f8739d3dcac6d663
+  dependencies:
+  - golang
+- name: eirini-persi-broker
+  version: f6283fdad4158c237462b71a218ab1cc28a9d51f48089471a41b1410ee5ba864
+  fingerprint: f6283fdad4158c237462b71a218ab1cc28a9d51f48089471a41b1410ee5ba864
+  sha1: sha256:44c76e2703f613f7d94c3ddd7f808c3a3562262fe8a47cd1a0f0ac8b8143e405
+  dependencies:
+  - golang
+- name: eirinifs
+  version: 51689557786f08abb36da5a119f670a7da5b92a95b82929761baaed5cf14a6a7
+  fingerprint: 51689557786f08abb36da5a119f670a7da5b92a95b82929761baaed5cf14a6a7
+  sha1: sha256:ffdfc2f7d1daccc23bb3a512b00d61aa71f836be664801ef4dc13edfc15d945c
+  dependencies: []
+- name: golang
+  version: 5ab93820e249a0923bda5ac6394074c0b8fef3b35a65a876b0eaeca879a68912
+  fingerprint: 5ab93820e249a0923bda5ac6394074c0b8fef3b35a65a876b0eaeca879a68912
+  sha1: sha256:51075a312302b9137fc7855859a89aebd7f4b7c08f1ae570b003c0a717da3957
+  dependencies: []
+- name: kubectl
+  version: abb3014538297e42ee527e4625b487c7aae4641fd39b538f26ddb7d9a1f80a44
+  fingerprint: abb3014538297e42ee527e4625b487c7aae4641fd39b538f26ddb7d9a1f80a44
+  sha1: sha256:05fefe8e8ecb74dd01ceddb5619197fb470e2de60ea8a353cbdaecba3f7e219e
+  dependencies: []
+- name: pid_utils
+  version: 60882ec87f35d03935d851331cf5d302771104fe14d64318f31465f262b22164
+  fingerprint: 60882ec87f35d03935d851331cf5d302771104fe14d64318f31465f262b22164
+  sha1: sha256:57a6a0582b0ac429705d921ca3359cbf40f4c75b046689fae71883d33af00015
+  dependencies: []
+license:
+  version: 8b3244f5084173690ae185af56279c848184813060a9472ee033472a5d17ee64
+  fingerprint: 8b3244f5084173690ae185af56279c848184813060a9472ee033472a5d17ee64
+  sha1: sha256:887ff20325ecebe91a00dc408602382a957d7aac8e2f6ceb0b1d759f67585f69

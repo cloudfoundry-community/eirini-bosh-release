@@ -11,6 +11,8 @@ status "Configuring Eirini"
 kubectl=/var/vcap/packages/kubectl/bin/kubectl
 
 $kubectl create secret generic "<%= p("opi.certs_secret_name") %>" -n "<%= p("opi.kube_namespace") %>" \
+  --from-literal=eirini-client-crt='<%= p("cc.opi.client_cert") %>' \
+  --from-literal=eirini-client-crt-key='<%= p("cc.opi.client_key") %>' \
   --from-literal=cc-server-crt='<%= p("opi.cc_cert") %>' \
   --from-literal=cc-server-crt-key='<%= p("opi.cc_key") %>' \
   --from-literal=cc-uploader-crt='<%= p("capi.cc_uploader.mutual_tls.server_cert") %>' \

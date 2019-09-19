@@ -17,6 +17,12 @@ properties:
   eirini-persi.operator_webhook_port:
     default: "2999"
     description: "Port the webhook server listens on."
+  eirini-persi.operator_webhook_servicename:
+    default: ""
+    description: "Service name where the webhook is listening."
+  eirini-persi.operator_webhook_namespace:
+    default: ""
+    description: "Namespace where the webhook service is listening."
   eirini-persi.kube_service_host:
     description: "Kubernetes service host. Should be set to the value of KUBERNETES_SERVICE_HOST."
   eirini-persi.kube_service_port:

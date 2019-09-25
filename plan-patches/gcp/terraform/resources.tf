@@ -46,8 +46,8 @@ resource "google_container_cluster" "gke-cluster" {
 # }
 
 # Firewall rules {
-resource "google_compute_firewall" "gke-nodes-to-opi" {
-  name    = "${var.env_id}-gke-nodes-to-opi"
+resource "google_compute_firewall" "gke-nodes-to-eirini" {
+  name    = "${var.env_id}-gke-nodes-to-eirini"
   network = "${google_compute_network.bbl-network.name}"
 
   allow {
@@ -60,7 +60,7 @@ resource "google_compute_firewall" "gke-nodes-to-opi" {
   }
 
   source_tags = ["${var.env_id}-cluster-nodes"]
-  target_tags = ["cf-opi"]
+  target_tags = ["cf-eirini"]
 }
 
 resource "google_compute_firewall" "gke-nodes-pods-to-doppler" {

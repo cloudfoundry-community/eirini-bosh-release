@@ -17,6 +17,7 @@ templates:
   loggregator-ca.crt.erb: config/loggregator-ca.crt
   loggregator-agent.crt.erb: config/loggregator-agent.crt
   loggregator-agent.key.erb: config/loggregator-agent.key
+  eirini-staging-secret.yaml.erb: config/eirini-staging-secret.yaml
 
 properties:
   eirini.loggregator_agent_image:
@@ -43,6 +44,9 @@ properties:
     description: "Kubernetes namespace where to run deployments and tasks"
   opi.system_namespace:
     description: "Kubernetes namespace where to deploy Eirini components"
+  opi.certs_secret_name:
+    description: "Name to use for Kubernetes secret used by Eirini for staging"
+    default: "cf_secrets"
 
   loggregator.ca-cert:
     description: "CA certificate that is signing the server certificate of the target doppler and loggregator agent"
@@ -50,6 +54,18 @@ properties:
     description: "Certificate of the loggregator agent"
   loggregator.agent-cert-key:
     description: "Private key of the loggregator agent"
+
+  cc.ca_cert:
+    description: "CA certificate that is signing the server certificate of the Cloud Controller"
+  cc.server_cert:
+    description: "Certificate of the Cloud Controller"
+  cc.server_cert_key:
+    description: "Private key of the Cloud Controller"
+
+  eirini.server_cert:
+    description: "TLS certificate for Eirini server"
+  eirini.server_key:
+    description: "Private key associated with TLS certificate for Eirini server"
 
   errand.daemonset_rollout_timeout:
     description: "String (e.g., '3s', '4m', '2h') indicating the time to allow the Eirini daemonset rollout to become healthy. The errand will exit with an error if the rollout takes longer than this time."

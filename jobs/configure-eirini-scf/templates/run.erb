@@ -17,7 +17,8 @@ $kubectl create secret generic "<%= p("opi.certs_secret_name") %>" -n "<%= p("op
   --from-literal=cc-server-crt-key='<%= p("opi.cc_key") %>' \
   --from-literal=cc-uploader-crt='<%= p("capi.cc_uploader.mutual_tls.server_cert") %>' \
   --from-literal=cc-uploader-crt-key='<%= p("capi.cc_uploader.mutual_tls.server_key") %>' \
-  --from-literal=internal-ca-cert='<%= p("opi.cc_ca") %>'
+  --from-literal=internal-ca-cert='<%= p("opi.cc_ca") %>' \
+  --dry-run -o json | $kubectl apply -f -
 
 <% if_p("eirini.cert_copier_image") do %>
 

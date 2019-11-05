@@ -1,0 +1,5 @@
+check process eirini-ssh-extension
+  with pidfile /var/vcap/sys/run/bpm/eirini-ssh-extension/eirini-ssh-extension.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start eirini-ssh-extension"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop eirini-ssh-extension"
+  group vcap

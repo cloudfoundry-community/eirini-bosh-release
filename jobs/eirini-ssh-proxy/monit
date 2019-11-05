@@ -1,0 +1,5 @@
+check process eirini-ssh-proxy
+  with pidfile /var/vcap/sys/run/bpm/eirini-ssh-proxy/eirini-ssh-proxy.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start eirini-ssh-proxy"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop eirini-ssh-proxy"
+  group vcap

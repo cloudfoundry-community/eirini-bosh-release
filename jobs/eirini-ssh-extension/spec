@@ -27,3 +27,7 @@ properties:
     description: "Kubernetes service host. Should be set to the value of KUBERNETES_SERVICE_HOST."
   eirini-ssh-extension.kube_service_port:
     description: "Kubernetes service port. Should be set to the value of KUBERNETES_SERVICE_PORT."
+  eirini-ssh-extension.register_only:
+    description: "Register the extension to Kubernetes."
+  eirini-ssh-extension.start_only:
+    description: "Starts the extension without registering it."

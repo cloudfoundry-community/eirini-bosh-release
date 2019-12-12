@@ -10,6 +10,12 @@ processes:
       EIRINI_EXTENSION_NAMESPACE: "<%= p("eirini-ssh-extension.namespace") %>"
       OPERATOR_SERVICE_NAME: "<%= p("eirini-ssh-extension.operator_webhook_servicename") %>"
       OPERATOR_WEBHOOK_NAMESPACE: "<%= p("eirini-ssh-extension.operator_webhook_namespace") %>"
+      <% if_p('eirini-ssh-extension.register_only') do |p| %>
+      EIRINI_EXTENSION_REGISTER_ONLY: "<%= p('eirini-ssh-extension.register_only') %>"
+      <% end %>
+      <% if_p('eirini-ssh-extension.start_only') do |p| %>
+      EIRINI_EXTENSION_START_ONLY: "<%= p('eirini-ssh-extension.start_only') %>"
+      <% end %>
     <% if properties.opi&.k8s&.host_url.nil? %>
     # The ServiceAccount admission controller has to be enabled.
     # https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod

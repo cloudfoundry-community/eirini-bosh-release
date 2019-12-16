@@ -1,7 +1,11 @@
 processes:
   - name: eirini-persi
     executable: /var/vcap/packages/eirini-persi/bin/eirini-persi
-    args: []
+    <% if_p('eirini-persi.register_only') do |p| %>
+    args: ["register"]
+    <% else %>
+    args: ["start"]
+    <% end %>
     env:
       KUBERNETES_SERVICE_HOST: "<%= p("eirini-persi.kube_service_host") %>"
       KUBERNETES_SERVICE_PORT: "<%= p("eirini-persi.kube_service_port") %>"
@@ -10,11 +14,8 @@ processes:
       NAMESPACE: "<%= p("eirini-persi.namespace") %>"
       OPERATOR_SERVICE_NAME: "<%= p("eirini-persi.operator_webhook_servicename") %>"
       OPERATOR_WEBHOOK_NAMESPACE: "<%= p("eirini-persi.operator_webhook_namespace") %>"
-      <% if_p('eirini-persi.register_only') do |p| %>
-      EIRINI_EXTENSION_REGISTER_ONLY: "<%= p('eirini-persi.register_only') %>"
-      <% end %>
       <% if_p('eirini-persi.start_only') do |p| %>
-      EIRINI_EXTENSION_START_ONLY: "<%= p('eirini-persi.start_only') %>"
+      EIRINI_EXTENSION_REGISTER: "False"
       <% end %>
     <% if properties.opi&.k8s&.host_url.nil? %>
     # The ServiceAccount admission controller has to be enabled.

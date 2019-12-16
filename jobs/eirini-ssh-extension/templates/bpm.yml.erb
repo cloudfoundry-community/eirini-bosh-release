@@ -1,20 +1,21 @@
 processes:
   - name: eirini-ssh-extension
     executable: /var/vcap/packages/eirini-ssh-extension/bin/eirini-ssh-extension
-    args: []
+    <% if_p('eirini-ssh-extension.register_only') do |p| %>
+    args: ["register"]
+    <% else %>
+    args: ["start"]
+    <% end %>
     env:
       KUBERNETES_SERVICE_HOST: "<%= p("eirini-ssh-extension.kube_service_host") %>"
       KUBERNETES_SERVICE_PORT: "<%= p("eirini-ssh-extension.kube_service_port") %>"
-      EIRINI_EXTENSION_HOST: "<%= p("eirini-ssh-extension.operator_webhook_host") %>"
-      EIRINI_EXTENSION_PORT: "<%= p("eirini-ssh-extension.operator_webhook_port") %>"
-      EIRINI_EXTENSION_NAMESPACE: "<%= p("eirini-ssh-extension.namespace") %>"
+      OPERATOR_WEBHOOK_HOST: "<%= p("eirini-ssh-extension.operator_webhook_host") %>"
+      OPERATOR_WEBHOOK_PORT: "<%= p("eirini-ssh-extension.operator_webhook_port") %>"
+      NAMESPACE: "<%= p("eirini-ssh-extension.namespace") %>"
       OPERATOR_SERVICE_NAME: "<%= p("eirini-ssh-extension.operator_webhook_servicename") %>"
       OPERATOR_WEBHOOK_NAMESPACE: "<%= p("eirini-ssh-extension.operator_webhook_namespace") %>"
-      <% if_p('eirini-ssh-extension.register_only') do |p| %>
-      EIRINI_EXTENSION_REGISTER_ONLY: "<%= p('eirini-ssh-extension.register_only') %>"
-      <% end %>
       <% if_p('eirini-ssh-extension.start_only') do |p| %>
-      EIRINI_EXTENSION_START_ONLY: "<%= p('eirini-ssh-extension.start_only') %>"
+      EIRINI_EXTENSION_REGISTER: "False"
       <% end %>
     <% if properties.opi&.k8s&.host_url.nil? %>
     # The ServiceAccount admission controller has to be enabled.

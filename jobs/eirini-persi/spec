@@ -27,3 +27,7 @@ properties:
     description: "Kubernetes service host. Should be set to the value of KUBERNETES_SERVICE_HOST."
   eirini-persi.kube_service_port:
     description: "Kubernetes service port. Should be set to the value of KUBERNETES_SERVICE_PORT."
+  eirini-persi.register_only:
+    description: "Register the extension to Kubernetes."
+  eirini-persi.start_only:
+    description: "Starts the extension without registering it."

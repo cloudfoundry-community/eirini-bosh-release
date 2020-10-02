@@ -52,8 +52,6 @@ properties:
     default: "cf_secrets"
   opi.cc_internal_api:
     description: "Internal URL for the Cloud Controller"
-  opi.cc_uploader_ip:
-    description: "IP Address of the Cloud Controller uploader"
   opi.downloader_image:
     default: ""
     description: "Downloads app-bits and buildpacks from the bits-service"

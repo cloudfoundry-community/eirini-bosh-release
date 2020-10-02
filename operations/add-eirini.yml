@@ -29,7 +29,6 @@
           nats_ip: q-s0.nats.default.cf.bosh
           certs_secret_name: eirini-staging-secret
           cc_internal_api: https://cloud-controller-ng.service.cf.internal:9023
-          cc_uploader_ip: ""
           eirini_address: https://eirini.service.cf.internal:8484
           downloader_image: "eirini/recipe-downloader"
           uploader_image: "eirini/recipe-uploader"

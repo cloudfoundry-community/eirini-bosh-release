@@ -5,9 +5,11 @@ processes:
     - connect
     - --config=/var/vcap/jobs/opi/config/opi.yml
     env:
-      KUBERNETES_SERVICE_HOST: "<%= p("opi.kube_service_host") %>"
-      KUBERNETES_SERVICE_PORT: "<%= p("opi.kube_service_port") %>"
-    <% if properties.opi&.k8s&.host_url.nil? %>
+      <% host = p("opi.kube_service_host", "") %>
+      <%= "KUBERNETES_SERVICE_HOST: \"#{host}\"" unless host.empty? %>
+      <% port = p("opi.kube_service_port", "") %>
+      <%= "KUBERNETES_SERVICE_PORT: \"#{port}\"" unless port.empty? %>
+    <% unless p("opi.k8s.host_url", "").empty? %>
     # The ServiceAccount admission controller has to be enabled.
     # https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod
     additional_volumes:
